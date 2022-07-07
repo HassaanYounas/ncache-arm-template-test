@@ -158,41 +158,6 @@
             "defaultValue": "NetworkSecurityGroup",
             "type": "String"
         },
-        "PlanName": {
-            "defaultValue": "ent-51",
-            "type": "String",
-            "metadata": {
-                "description": "Environment name for activation"
-            }
-        },
-        "Offer": {
-            "defaultValue": "ent_51",
-            "type": "String",
-            "metadata": {
-                "description": "Environment name for activation"
-            }
-        },
-        "SKU": {
-            "defaultValue": "ent-51",
-            "type": "String",
-            "metadata": {
-                "description": "Environment name for activation"
-            }
-        },
-        "Publisher": {
-            "defaultValue": "ncache",
-            "type": "String",
-            "metadata": {
-                "description": "Environment name for activation"
-            }
-        },
-        "Product": {
-            "defaultValue": "ent_51",
-            "type": "String",
-            "metadata": {
-                "description": "Environment name for activation"
-            }
-        },
         "Version": {
             "defaultValue": "latest",
             "type": "String",
@@ -216,11 +181,6 @@
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkInterfaces/', concat(parameters('networkInterfaceName'), copyIndex(1)))]"
             ],
-            "plan": {
-                "name": "[parameters('PlanName')]",
-                "publisher": "[parameters('Publisher')]",
-                "product": "[parameters('Product')]"
-            },
             "properties": {
                 "osProfile": {
                     "computerName": "[concat(parameters('virtualMachineNamePrefix'), copyIndex(1))]",
@@ -236,10 +196,7 @@
                 },
                 "storageProfile": {
                     "imageReference": {
-                        "publisher": "[parameters('Publisher')]",
-                        "offer": "[parameters('Offer')]",
-                        "sku": "[parameters('SKU')]",
-                        "version": "[parameters('Version')]"
+                        "id": "[parameters('ImageId')]"
                     },
                     "osDisk": {
                         "createOption": "FromImage",
