@@ -158,13 +158,6 @@
             "defaultValue": "NetworkSecurityGroup",
             "type": "String"
         },
-        "PlanName": {
-            "defaultValue": "ent-51",
-            "type": "String",
-            "metadata": {
-                "description": "Environment name for activation"
-            }
-        },
         "Offer": {
             "defaultValue": "ent_51",
             "type": "String",
@@ -174,20 +167,6 @@
         },
         "SKU": {
             "defaultValue": "ent-51",
-            "type": "String",
-            "metadata": {
-                "description": "Environment name for activation"
-            }
-        },
-        "Publisher": {
-            "defaultValue": "ncache",
-            "type": "String",
-            "metadata": {
-                "description": "Environment name for activation"
-            }
-        },
-        "Product": {
-            "defaultValue": "ent_51",
             "type": "String",
             "metadata": {
                 "description": "Environment name for activation"
@@ -205,6 +184,12 @@
             "metadata": {
                 "description": "NCache Edition"
             }
+        },
+        "PlanId": {
+            "type": "String",
+            "metadata": {
+                "description": "Plan ID for Plan"
+            }
         }
     },
     "resources": [
@@ -217,9 +202,7 @@
                 "[resourceId('Microsoft.Network/networkInterfaces/', concat(parameters('networkInterfaceName'), copyIndex(1)))]"
             ],
             "plan": {
-                "name": "[parameters('PlanName')]",
-                "publisher": "[parameters('Publisher')]",
-                "product": "[parameters('Product')]"
+                "id": "[parameters('PlanId')]"
             },
             "properties": {
                 "osProfile": {
