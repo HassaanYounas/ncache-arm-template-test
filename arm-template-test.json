@@ -178,7 +178,7 @@
     "resources": [
         {
             "type": "Microsoft.Compute/virtualMachines",
-            "apiVersion": "2017-12-01",
+            "apiVersion": "2015-01-01",
             "name": "[concat(parameters('virtualMachineNamePrefix'), copyIndex(1))]",
             "location": "[parameters('location')]",
             "dependsOn": [
