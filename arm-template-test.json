@@ -143,6 +143,9 @@
         "subnetName": {
             "type": "String"
         },
+        "ImageId": {
+            "type": "String"
+        },
         "subnetPrefix": {
             "type": "String"
         },
