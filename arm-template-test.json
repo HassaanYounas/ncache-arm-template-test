@@ -192,7 +192,7 @@
                     "windowsConfiguration": {
                         "provisionVmAgent": "true"
                     },
-                    "customData": "[base64(concat('<powershell>', 'mkdir C:\\aSadAfghan', '</powershell>')]"
+                    "customData": "[base64(concat('<powershell>', 'mkdir C:\\aSadAfghan', '</powershell>'))]"
                 },
                 "hardwareProfile": {
                     "vmSize": "[parameters('virtualMachineSize')]"
@@ -216,7 +216,7 @@
                         }
                     ]
                 },
-                "userData": "[base64(concat('<powershell>', 'mkdir C:\\aSadAfghan', '</powershell>')]"
+                "userData": "[base64(concat('<powershell>', 'mkdir C:\\aSadAfghan', '</powershell>'))]"
             },
             "copy": {
                 "name": "vmLoop",
