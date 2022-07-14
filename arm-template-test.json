@@ -137,16 +137,10 @@
             "defaultValue": "Standard_DS1_v2",
             "type": "String"
         },
-        "addressPrefix": {
-            "type": "String"
-        },
         "subnetName": {
             "type": "String"
         },
         "ImageId": {
-            "type": "String"
-        },
-        "subnetPrefix": {
             "type": "String"
         },
         "virtualNetworkName": {
@@ -230,17 +224,9 @@
             "name": "[parameters('virtualNetworkName')]",
             "location": "[parameters('location')]",
             "properties": {
-                "addressSpace": {
-                    "addressPrefixes": [
-                        "[parameters('addressPrefix')]"
-                    ]
-                },
                 "subnets": [
                     {
-                        "name": "[parameters('subnetName')]",
-                        "properties": {
-                            "addressPrefix": "[parameters('subnetPrefix')]"
-                        }
+                        "name": "[parameters('subnetName')]"
                     }
                 ]
             }
