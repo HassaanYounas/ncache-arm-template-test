@@ -1,46 +1,65 @@
 Param(
     [Parameter(Mandatory = $true)]
     [string]$clusterName,
+
     [Parameter(Mandatory = $true)]
     [string]$topology,
-    [Parameter(Mandatory = $true)]
+
+    [Parameter]
     [Int32]$port,
+
     [Parameter(Mandatory = $true)]
     [string]$currentIP,
+
     [Parameter(Mandatory = $true)]
     [string]$serverIP,
+
     [Parameter(Mandatory = $true)]
     [string]$replicationStrategy,
+
     [Parameter(Mandatory = $true)]
     [string]$evictionPolicy,
-    [Parameter(Mandatory = $true)]
-    [string]$defaultPriority,
+
     [Parameter(Mandatory = $true)]
     [Int32]$maxSize,
+
     [Parameter(Mandatory = $true)]
     [Int32]$evictionPercentage,
+
     [Parameter(Mandatory = $true)]
     [string]$firstName,
+
     [Parameter(Mandatory = $true)]
     [string]$lastName,
+
     [Parameter(Mandatory = $true)]
     [string]$emailAddress,
+
     [Parameter(Mandatory = $true)]
     [string]$company,
-    [Parameter(Mandatory = $true)]
-    [string]$phone,
-    [Parameter(Mandatory = $true)]
-    [string]$ncacheVersion,
-    [parameter(mandatory = $true)]
-    [string]$sku,
+
     [Parameter(Mandatory = $true)]
     [AllowEmptyString()]
     [string]$licenseKey,
+
     [Parameter(Mandatory = $true)]
-    [Int32]$vmCount
+    [Int32]$vmCount,
+
+    [Parameter(Mandatory = $true)]
+    [string]$environment,
+
+    [Parameter(Mandatory = $true)]
+    [string]$phone,
+
+    [Parameter(Mandatory = $true)]
+    [string]$ncacheVersion,
+
+    [Parameter]
+    [string]$sku,
+
+    [Parameter]
+    [string]$defaultPriority
 )
-    #Clear-Host
-    #$Error.Clear()
 
 function SetFirewallRules 
 {
@@ -431,7 +450,7 @@ function GetNCacheAcivation
     }
 
     if ($licenseKey -ne "") {
-        $NActivateExpression = '& "' + 'C:\Program Files\NCache\' + 'bin\NActivate\NActivate.exe" /k ' + $licenseKey + ' /f "' + $firstName + '" /l "' + $lastName + '" /e "' + $emailAddress + '" /comp "' + $company + '" /p ' + $phone
+        $NActivateExpression = '& "' + 'C:\Program Files\NCache\' + 'bin\NActivate\NActivate.exe" /k ' + $licenseKey + ' /f "' + $firstName + '" /l "' + $lastName + '" /e "' + $emailAddress + '" /comp "' + $company + '" /p "' + $phone + '" /v ' + $environment
     
         try {
             Invoke-Expression -Command $NActivateExpression >> C:\NCache-Init-Status.txt
