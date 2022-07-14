@@ -210,7 +210,6 @@
                         }
                     ]
                 },
-                "userData": "[base64(concat('<powershell>', 'mkdir C:\\aSadAfghan', '</powershell>'))]"
             },
             "copy": {
                 "name": "vmLoop",
@@ -219,25 +218,11 @@
             }
         },
         {
-            "type": "Microsoft.Network/virtualNetworks",
-            "apiVersion": "2017-11-01",
-            "name": "[parameters('virtualNetworkName')]",
-            "location": "[parameters('location')]",
-            "properties": {
-                "subnets": [
-                    {
-                        "name": "[parameters('subnetName')]"
-                    }
-                ]
-            }
-        },
-        {
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2017-11-01",
             "name": "[concat(parameters('networkInterfaceName'), copyIndex(1))]",
             "location": "[parameters('location')]",
             "dependsOn": [
-                "[parameters('virtualNetworkName')]",
                 "[resourceId('Microsoft.Network/publicIpAddresses/', concat(parameters('publicIpAddressName'), copyIndex(1)))]",
                 "[parameters('networkSecurityGroupName')]"
             ],
