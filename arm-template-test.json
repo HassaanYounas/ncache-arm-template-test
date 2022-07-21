@@ -140,10 +140,6 @@
         "subnetName": {
             "type": "String"
         },
-        "ImageId": {
-	    "default": "",
-            "type": "String"
-        },
         "virtualNetworkName": {
             "defaultValue": "MyVNET1",
             "type": "String"
@@ -239,9 +235,6 @@
                     "vmSize": "[parameters('virtualMachineSize')]"
                 },
                 "storageProfile": {
-                    "imageReference": {
-                        "id": "[parameters('ImageId')]"
-                    },
                     "osDisk": {
                         "createOption": "FromImage",
                         "managedDisk": {
