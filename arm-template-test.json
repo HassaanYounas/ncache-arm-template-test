@@ -141,6 +141,7 @@
             "type": "String"
         },
         "ImageId": {
+	    "default": "",
             "type": "String"
         },
         "virtualNetworkName": {
@@ -220,10 +221,10 @@
                 "[resourceId('Microsoft.Network/networkInterfaces/', concat(parameters('networkInterfaceName'), copyIndex(1)))]"
             ],
             "plan": {
-				"name": "[parameters('PlanName')]",
-				"publisher": "[parameters('Publisher')]",
-				"product": "[parameters('Product')]"
-			},
+		"name": "[parameters('PlanName')]",
+		"publisher": "[parameters('Publisher')]",
+		"product": "[parameters('Product')]"
+	    },
             "properties": {
                 "osProfile": {
                     "computerName": "[concat(parameters('virtualMachineNamePrefix'), copyIndex(1))]",
