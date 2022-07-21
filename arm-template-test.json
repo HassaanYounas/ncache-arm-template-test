@@ -235,6 +235,12 @@
                     "vmSize": "[parameters('virtualMachineSize')]"
                 },
                 "storageProfile": {
+		    "imageReference": {
+			"publisher": "[parameters('Publisher')]",
+			"offer": "[parameters('Offer')]",
+			"sku": "[parameters('SKU')]",
+			"version": "[parameters('Version')]"
+		    },
                     "osDisk": {
                         "createOption": "FromImage",
                         "managedDisk": {
