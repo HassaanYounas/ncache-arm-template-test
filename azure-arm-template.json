@@ -11,139 +11,139 @@
         },
 		"InstallType": {
             "defaultValue": "",
-            "type": "String",
+            "type": "string",
             "metadata": {
                 "description": "Install type for Azure SaaS"
             }
         },
 		"StagingActivateJsonURL": {
             "defaultValue": "",
-            "type": "String",
+            "type": "string",
             "metadata": {
                 "description": "URL for activate.json"
             }
         },
 		"StagingCloudURL": {
             "defaultValue": "",
-            "type": "String",
+            "type": "string",
             "metadata": {
                 "description": "URL for staging"
             }
         },
 		"Key": {
             "defaultValue": "NotSpecified",
-            "type": "String",
+            "type": "string",
             "metadata": {
                 "description": "Evaluation/Extension key to for NCache"
             }
         },
         "FirstName": {
-            "type": "String",
+            "type": "string",
             "metadata": {
                 "description": "First Name"
             }
         },
         "LastName": {
-            "type": "String",
+            "type": "string",
             "metadata": {
                 "description": "Last Name"
             }
         },
         "Company": {
-            "type": "String",
+            "type": "string",
             "metadata": {
                 "description": "Company"
             }
         },
         "EmailAddress": {
-            "type": "String",
+            "type": "string",
             "metadata": {
                 "description": "Email Address"
             }
         },
         "AdminUsername": {
             "defaultValue": "azadmin",
-            "type": "String",
+            "type": "string",
             "metadata": {
                 "description": "NCache VM administrator username"
             }
         },
         "AdminPassword": {
             "defaultValue": "12345Alachisoft",
-            "type": "SecureString",
+            "type": "secureString",
             "metadata": {
                 "description": "NCache VM administrative user password"
             }
         },
         "PublicIpAddressName": {
             "defaultValue": "NC_VM_IP_",
-            "type": "String"
+            "type": "string"
         },
         "Location": {
             "defaultValue": "[resourceGroup().location]",
-            "type": "String"
+            "type": "string"
         },
         "VirtualMachineNamePrefix": {
             "defaultValue": "NC_VM_",
-            "type": "String"
+            "type": "string"
         },
         "VirtualMachineSize": {
             "defaultValue": "Standard_DS1_v2",
-            "type": "String"
+            "type": "string"
         },
         "SubnetName": {
-            "type": "String"
+            "type": "string"
         },
         "VirtualNetworkName": {
             "defaultValue": "MyVNET1",
-            "type": "String"
+            "type": "string"
         },
         "NetworkInterfaceName": {
             "defaultValue": "NC_NIC_",
-            "type": "String"
+            "type": "string"
         },
         "NetworkSecurityGroupName": {
             "defaultValue": "NetworkSecurityGroup",
-            "type": "String"
+            "type": "string"
         },
         "PlanName": {
             "defaultValue": "",
-            "type": "String",
+            "type": "string",
             "metadata": {
                 "description": "Azure plan"
             }
         },
         "Offer": {
             "defaultValue": "",
-            "type": "String",
+            "type": "string",
             "metadata": {
                 "description": "Azure offer"
             }
         },
         "SKU": {
             "defaultValue": "",
-            "type": "String",
+            "type": "string",
             "metadata": {
                 "description": "SKU of image"
             }
         },
         "Publisher": {
             "defaultValue": "ncache",
-            "type": "String",
+            "type": "string",
             "metadata": {
                 "description": "Publisher of image"
             }
         },
         "Product": {
             "defaultValue": "",
-            "type": "String",
+            "type": "string",
             "metadata": {
                 "description": "Product Id of offer"
             }
         },
         "Version": {
             "defaultValue": "latest",
-            "type": "String",
+            "type": "string",
             "metadata": {
                 "description": "Version number of NCache."
             }
@@ -152,14 +152,15 @@
 			"defaultValue": 7800,
 			"minValue": 1024,
 			"maxValue": 65535,
-			"type": "Int",
+			"type": "int",
 			"metadata": {
 				"description": "Port for NCache Cluster"
+            }
 		},
 		"NCacheVmCount": {
             "defaultValue": 1,
             "minValue": 1,
-            "type": "Int",
+            "type": "int",
             "metadata": {
                 "description": "Number of NCache Nodes to be deployed"
             }
