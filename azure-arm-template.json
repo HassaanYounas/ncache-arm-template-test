@@ -2,153 +2,107 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "cacheName": {
-            "defaultValue": "DemoCache",
+		"Extension": {
+            "defaultValue": false,
+            "type": "bool",
+            "metadata": {
+                "description": "Is Free Trial subscription in extension or not"
+            }
+        },
+		"InstallType": {
+            "defaultValue": "",
             "type": "String",
             "metadata": {
-                "description": "Name(s) for cache cluster"
+                "description": "Install type for Azure SaaS"
             }
         },
-        "cacheTopology": {
-            "defaultValue": "PartitionedOfReplica",
+		"StagingActivateJsonURL": {
+            "defaultValue": "",
             "type": "String",
             "metadata": {
-                "description": "Topology(s) for NCache Cluster"
+                "description": "URL for activate.json"
             }
         },
-        "cacheSize": {
-            "defaultValue": "1024",
+		"StagingCloudURL": {
+            "defaultValue": "",
             "type": "String",
             "metadata": {
-                "description": "Cache size(s)"
+                "description": "URL for staging"
             }
         },
-        "NCacheVmCount": {
-            "defaultValue": 2,
-            "minValue": 1,
-            "type": "Int",
+		"Key": {
+            "defaultValue": "NotSpecified",
+            "type": "String",
             "metadata": {
-                "description": "Number of NCache Nodes to be deployed"
+                "description": "Evaluation/Extension key to for NCache"
             }
         },
-        "adminUsername": {
+        "FirstName": {
+            "type": "String",
+            "metadata": {
+                "description": "First Name"
+            }
+        },
+        "LastName": {
+            "type": "String",
+            "metadata": {
+                "description": "Last Name"
+            }
+        },
+        "Company": {
+            "type": "String",
+            "metadata": {
+                "description": "Company"
+            }
+        },
+        "EmailAddress": {
+            "type": "String",
+            "metadata": {
+                "description": "Email Address"
+            }
+        },
+        "AdminUsername": {
             "defaultValue": "azadmin",
             "type": "String",
             "metadata": {
                 "description": "NCache VM administrator username"
             }
         },
-        "adminPassword": {
+        "AdminPassword": {
             "defaultValue": "12345Alachisoft",
             "type": "SecureString",
             "metadata": {
                 "description": "NCache VM administrative user password"
             }
         },
-        "licenseKey": {
-            "defaultValue": "NotSpecified",
-            "type": "String",
-            "metadata": {
-                "description": "License key to register NCache"
-            }
-        },
-        "environmentName": {
-            "defaultValue": "NotSpecified",
-            "type": "String",
-            "metadata": {
-                "description": "Environment name for activation"
-            }
-        },
-        "numberOfClients": {
-            "defaultValue": 0,
-            "type": "Int",
-            "metadata": {
-                "description": "Number of clients of Node"
-            }
-        },
-        "firstName": {
-            "type": "String",
-            "metadata": {
-                "description": "First Name"
-            }
-        },
-        "lastName": {
-            "type": "String",
-            "metadata": {
-                "description": "Last Name"
-            }
-        },
-        "company": {
-            "type": "String",
-            "metadata": {
-                "description": "Company"
-            }
-        },
-        "emailAddress": {
-            "type": "String",
-            "metadata": {
-                "description": "Email Address"
-            }
-        },
-        "clusterPort": {
-            "defaultValue": 7800,
-            "minValue": 1024,
-            "maxValue": 65535,
-            "type": "Int",
-            "metadata": {
-                "description": "Port for NCache Cluster"
-            }
-        },
-        "replicationStrategy": {
-            "defaultValue": "async",
-            "allowedValues": [
-                "async",
-                "sync"
-            ],
+        "PublicIpAddressName": {
+            "defaultValue": "NC_VM_IP_",
             "type": "String"
         },
-        "evictionPolicy": {
-            "defaultValue": "LRU",
-            "allowedValues": [
-                "none",
-                "LRU",
-                "LFU",
-                "Priority"
-            ],
-            "type": "String"
-        },
-        "evictionPercentage": {
-            "defaultValue": "5",
-            "type": "String"
-        },
-        "publicIpAddressName": {
-            "defaultValue": "[concat(parameters('virtualMachineNamePrefix'), 'ip')]",
-            "type": "String"
-        },
-        "location": {
+        "Location": {
             "defaultValue": "[resourceGroup().location]",
             "type": "String"
         },
-        "virtualMachineNamePrefix": {
-            "defaultValue": "NCacheVM",
+        "VirtualMachineNamePrefix": {
+            "defaultValue": "NC_VM_",
             "type": "String"
         },
-        "virtualMachineSize": {
+        "VirtualMachineSize": {
             "defaultValue": "Standard_DS1_v2",
             "type": "String"
         },
-        "subnetName": {
+        "SubnetName": {
             "type": "String"
         },
-        "virtualNetworkName": {
+        "VirtualNetworkName": {
             "defaultValue": "MyVNET1",
             "type": "String"
         },
-        "networkInterfaceName": {
-            "defaultValue": "[concat(parameters('virtualMachineNamePrefix'), 'NIC')]",
+        "NetworkInterfaceName": {
+            "defaultValue": "NC_NIC_",
             "type": "String"
         },
-        "networkSecurityGroupName": {
+        "NetworkSecurityGroupName": {
             "defaultValue": "NetworkSecurityGroup",
             "type": "String"
         },
@@ -156,35 +110,35 @@
             "defaultValue": "",
             "type": "String",
             "metadata": {
-                "description": "Environment name for activation"
+                "description": "Azure plan"
             }
         },
         "Offer": {
             "defaultValue": "",
             "type": "String",
             "metadata": {
-                "description": "Environment name for activation"
+                "description": "Azure offer"
             }
         },
         "SKU": {
             "defaultValue": "",
             "type": "String",
             "metadata": {
-                "description": "Environment name for activation"
+                "description": "SKU of image"
             }
         },
         "Publisher": {
             "defaultValue": "ncache",
             "type": "String",
             "metadata": {
-                "description": "Environment name for activation"
+                "description": "Publisher of image"
             }
         },
         "Product": {
             "defaultValue": "",
             "type": "String",
             "metadata": {
-                "description": "Environment name for activation"
+                "description": "Product Id of offer"
             }
         },
         "Version": {
@@ -194,53 +148,57 @@
                 "description": "Version number of NCache."
             }
         },
-        "Edition": {
+		"ClusterPort": {
+			"defaultValue": 7800,
+			"minValue": 1024,
+			"maxValue": 65535,
+			"type": "Int",
+			"metadata": {
+				"description": "Port for NCache Cluster"
+		},
+		"NCacheVmCount": {
+            "defaultValue": 1,
+            "minValue": 1,
             "type": "Int",
             "metadata": {
-                "description": "NCache Edition"
-            }
-        },
-        "Phone": {
-            "type": "String",
-            "metadata": {
-                "description": "Contact number of user."
+                "description": "Number of NCache Nodes to be deployed"
             }
         }
     },
     "resources": [
-        {
+		{
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2021-04-01",
-            "name": "[concat(parameters('virtualMachineNamePrefix'), copyIndex(1))]",
-            "location": "[parameters('location')]",
+            "name": "[concat(parameters('VirtualMachineNamePrefix'), copyIndex(1))]",
+            "location": "[parameters('Location')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces/', concat(parameters('networkInterfaceName'), copyIndex(1)))]"
+                "[resourceId('Microsoft.Network/networkInterfaces/', concat(parameters('NetworkInterfaceName'), copyIndex(1)))]"
             ],
             "plan": {
-		"name": "[parameters('PlanName')]",
-		"publisher": "[parameters('Publisher')]",
-		"product": "[parameters('Product')]"
+			"name": "[parameters('PlanName')]",
+			"publisher": "[parameters('Publisher')]",
+			"product": "[parameters('Product')]"
 	    },
-            "properties": {
-                "osProfile": {
-                    "computerName": "[concat(parameters('virtualMachineNamePrefix'), copyIndex(1))]",
-                    "adminUsername": "[parameters('adminUsername')]",
-                    "adminPassword": "[parameters('adminPassword')]",
-                    "windowsConfiguration": {
-                        "provisionVmAgent": "true"
-                    },
-                   "customData": "[base64(concat('$xmlWriter=New-Object System.XMl.XmlTextWriter(\"$Env:NCHOME\\config\\ncache-cloud.xml\" ,$Null);$xmlWriter.Formatting=\"Indented\";$xmlWriter.Indentation=1;$xmlWriter.WriteStartDocument();$xmlWriter.WriteStartElement(\"cloud-subscription\");$xmlWriter.WriteElementString(\"activation-key\", \"', parameters('licenseKey'), '\");$xmlWriter.WriteElementString(\"environment-name\", \"', parameters('environmentName'), '\");$xmlWriter.WriteElementString(\"client-licenses\", \"', parameters('numberOfClients'), '\");$xmlWriter.WriteElementString(\"first-name\", \"', parameters('firstName'), '\");$xmlWriter.WriteElementString(\"last-name\", \"', parameters('lastName'), '\");$xmlWriter.WriteElementString(\"email\", \"', parameters('emailAddress'), '\");$xmlWriter.WriteElementString(\"company\", \"', parameters('company'), '\");$xmlWriter.WriteEndElement();$xmlWriter.Flush();$xmlWriter.Close();','Invoke-WebRequest -Uri \"https://raw.githubusercontent.com/HassaanYounas/ncache-arm-template-test/main/NCacheConfiguration.ps1 \" -OutFile C:/NCacheConfiguration.ps1;C:/NCacheConfiguration.ps1 ', ' -clusterName \"', parameters('cacheName'), '\" -topology \"', parameters('cacheTopology'), '\" -currentIP ', reference(concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName'), copyIndex(1))).ipConfigurations[0].properties.privateIPAddress, ' -serverIP ', reference(concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName'), 1)).ipConfigurations[0].properties.privateIPAddress, ' -replicationStrategy ', parameters('replicationStrategy'), ' -evictionPolicy ', parameters('evictionPolicy'), ' -maxSize \"', parameters('cacheSize'), '\" -evictionPercentage ', parameters('evictionPercentage'), ' -firstName ', parameters('firstName'), ' -lastName ', parameters('lastName'), ' -emailAddress ', parameters('emailAddress'), ' -company ', parameters('company'), ' -environment ', parameters('environmentName'), ' -licenseKey ', parameters('licenseKey'), ' -vmCount ', parameters('NCacheVmCount'), ' -phone ', parameters('Phone'), ' -ncacheVersion ', parameters('Version')))]"  
+		"properties": {
+			"osProfile": {
+				"computerName": "[concat(parameters('VirtualMachineNamePrefix'), copyIndex(1))]",
+				"adminUsername": "[parameters('AdminUsername')]",
+				"adminPassword": "[parameters('AdminPassword')]",
+				"windowsConfiguration": {
+					"provisionVmAgent": "true"
+				},
+				"customData": "[base64(concat('Invoke-WebRequest -Uri \"https://raw.githubusercontent.com/HassaanYounas/ncache-arm-template-test/main/StartupScriptWin.ps1 \" -OutFile C:/StartupScriptWin.ps1; C:/StartupScriptWin.ps1 ', ' -StagingCloudURL \"', parameters('StagingCloudURL'), '\" -StagingActivateJsonURL \"', parameters('StagingActivateJsonURL'), ' -Extension \"', parameters('Extension'), ' -InstallType \"', parameters('InstallType'), ' -Key \"', parameters('Key'), ' -FirstName \"', parameters('FirstName'), ' -LastName \"', parameters('LastName'), ' -Email \"', parameters('Email'), ' -Company \"', parameters('Company')))]"  
                 },
                 "hardwareProfile": {
-                    "vmSize": "[parameters('virtualMachineSize')]"
+                    "vmSize": "[parameters('VirtualMachineSize')]"
                 },
                 "storageProfile": {
-		    "imageReference": {
-			"publisher": "[parameters('Publisher')]",
-			"offer": "[parameters('Offer')]",
-			"sku": "[parameters('SKU')]",
-			"version": "[parameters('Version')]"
-		    },
+				"imageReference": {
+					"publisher": "[parameters('Publisher')]",
+					"offer": "[parameters('Offer')]",
+					"sku": "[parameters('SKU')]",
+					"version": "[parameters('Version')]"
+				},
                     "osDisk": {
                         "createOption": "FromImage",
                         "managedDisk": {
@@ -252,10 +210,10 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('networkInterfaceName'), copyIndex(1)))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('NetworkInterfaceName'), copyIndex(1)))]"
                         }
                     ]
-                },
+                }
             },
             "copy": {
                 "name": "vmLoop",
@@ -266,11 +224,11 @@
         {
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2017-11-01",
-            "name": "[concat(parameters('networkInterfaceName'), copyIndex(1))]",
-            "location": "[parameters('location')]",
+            "name": "[concat(parameters('NetworkInterfaceName'), copyIndex(1))]",
+            "location": "[parameters('Location')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/publicIpAddresses/', concat(parameters('publicIpAddressName'), copyIndex(1)))]",
-                "[parameters('networkSecurityGroupName')]"
+                "[resourceId('Microsoft.Network/publicIpAddresses/', concat(parameters('PublicIpAddressName'), copyIndex(1)))]",
+                "[parameters('NetworkSecurityGroupName')]"
             ],
             "properties": {
                 "ipConfigurations": [
@@ -278,17 +236,17 @@
                         "name": "ipconfig1",
                         "properties": {
                             "subnet": {
-                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets/', parameters('virtualNetworkName'), parameters('subnetName'))]"
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets/', parameters('VirtualNetworkName'), parameters('SubnetName'))]"
                             },
                             "privateIPAllocationMethod": "Dynamic",
                             "publicIpAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIpAddresses', concat(parameters('publicIpAddressName'), copyIndex(1)))]"
+                                "id": "[resourceId('Microsoft.Network/publicIpAddresses', concat(parameters('PublicIpAddressName'), copyIndex(1)))]"
                             }
                         }
                     }
                 ],
                 "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('NetworkSecurityGroupName'))]"
                 }
             },
             "copy": {
@@ -300,8 +258,8 @@
         {
             "type": "Microsoft.Network/publicIpAddresses",
             "apiVersion": "2017-11-01",
-            "name": "[concat(parameters('publicIpAddressName'), copyIndex(1))]",
-            "location": "[parameters('location')]",
+            "name": "[concat(parameters('PublicIpAddressName'), copyIndex(1))]",
+            "location": "[parameters('Location')]",
             "tags": {
                 "ipAddress": "ipAddresses"
             },
@@ -317,8 +275,8 @@
         {
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2016-09-01",
-            "name": "[parameters('networkSecurityGroupName')]",
-            "location": "[parameters('location')]",
+            "name": "[parameters('NetworkSecurityGroupName')]",
+            "location": "[parameters('Location')]",
             "properties": {
                 "securityRules": [
                     {
@@ -340,7 +298,7 @@
                             "priority": 1001,
                             "sourceAddressPrefix": "*",
                             "protocol": "Tcp",
-                            "destinationPortRange": "[parameters('clusterPort')]",
+                            "destinationPortRange": "[parameters('ClusterPort')]",
                             "access": "Allow",
                             "direction": "Inbound",
                             "sourcePortRange": "*",
@@ -379,7 +337,7 @@
                             "priority": 1004,
                             "sourceAddressPrefix": "*",
                             "protocol": "Tcp",
-                            "destinationPortRange": "[parameters('clusterPort')]",
+                            "destinationPortRange": "[parameters('ClusterPort')]",
                             "access": "Allow",
                             "direction": "Outbound",
                             "sourcePortRange": "*",
