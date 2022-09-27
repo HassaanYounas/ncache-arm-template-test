@@ -84,7 +84,7 @@
             "type": "string"
         },
         "VirtualMachineNamePrefix": {
-            "defaultValue": "NC_VM_",
+            "defaultValue": "NC-VM-",
             "type": "string"
         },
         "VirtualMachineSize": {
@@ -99,7 +99,7 @@
             "type": "string"
         },
         "NetworkInterfaceName": {
-            "defaultValue": "NC_NIC_",
+            "defaultValue": "NC-NIC-",
             "type": "string"
         },
         "NetworkSecurityGroupName": {
