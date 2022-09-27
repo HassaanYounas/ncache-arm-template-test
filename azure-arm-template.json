@@ -55,7 +55,7 @@
                 "description": "Company"
             }
         },
-        "EmailAddress": {
+        "Email": {
             "type": "string",
             "metadata": {
                 "description": "Email Address"
