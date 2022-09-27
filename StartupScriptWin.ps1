@@ -1,11 +1,11 @@
 Param(
-	[Parameter]
+	[Parameter()]
     [string]$StagingCloudURL,
 
-	[Parameter]
+	[Parameter()]
     [string]$StagingActivateJsonURL,
 
-    [Parameter]
+    [Parameter()]
     [bool]$Extension,
 	
 	[Parameter(Mandatory = $true)]
