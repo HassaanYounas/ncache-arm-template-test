@@ -188,7 +188,7 @@
 				"windowsConfiguration": {
 					"provisionVmAgent": "true"
 				},
-				"customData": "[base64(concat('Invoke-WebRequest -Uri \"https://raw.githubusercontent.com/HassaanYounas/ncache-arm-template-test/main/StartupScriptWin.ps1 \" -OutFile C:/StartupScriptWin.ps1; Unblock-File -Path C:/StartupScriptWin.ps1; C:/StartupScriptWin.ps1 ', ' -StagingCloudURL \"', parameters('StagingCloudURL'), '\" -StagingActivateJsonURL \"', parameters('StagingActivateJsonURL'), ' -Extension \"', parameters('Extension'), ' -InstallType \"', parameters('InstallType'), ' -Key \"', parameters('Key'), ' -FirstName \"', parameters('FirstName'), ' -LastName \"', parameters('LastName'), ' -Email \"', parameters('Email'), ' -Company \"', parameters('Company')))]"  
+				"customData": "[base64(concat('Invoke-WebRequest -Uri \"https://raw.githubusercontent.com/HassaanYounas/ncache-arm-template-test/main/StartupScriptWin.ps1 \" -OutFile C:/StartupScriptWin.ps1; Unblock-File -Path C:/StartupScriptWin.ps1; C:/StartupScriptWin.ps1 ', ' -StagingCloudURL \"', parameters('StagingCloudURL'), '\" -StagingActivateJsonURL \"', parameters('StagingActivateJsonURL'), '\" -Extension ', parameters('Extension'), ' -InstallType \"', parameters('InstallType'), '\" -Key \"', parameters('Key'), '\" -FirstName \"', parameters('FirstName'), '\" -LastName \"', parameters('LastName'), '\" -Email \"', parameters('Email'), '\" -Company \"', parameters('Company'), '\"'))]"  
                 },
                 "hardwareProfile": {
                     "vmSize": "[parameters('VirtualMachineSize')]"
