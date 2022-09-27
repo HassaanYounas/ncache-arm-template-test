@@ -178,11 +178,6 @@
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkInterfaces/', concat(parameters('NetworkInterfaceName'), copyIndex(1)))]"
             ],
-            "plan": {
-			"name": "[parameters('PlanName')]",
-			"publisher": "[parameters('Publisher')]",
-			"product": "[parameters('Product')]"
-	    },
 		"properties": {
 			"osProfile": {
 				"computerName": "[concat(parameters('VirtualMachineNamePrefix'), copyIndex(1))]",
