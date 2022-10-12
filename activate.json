@@ -1,4 +1,4 @@
 {
-	"CloudHost": "https://staging.alachisoft.com/api",
+	"CloudHost": "https://staging.alachisoft.com",
 	"Host": "cloud:81"
 }
