@@ -31,37 +31,37 @@ function SetFirewallRules
 {
     $status = Invoke-Expression -Command 'New-NetFirewallRule -DisplayName nc-management-port -Direction Inbound -Action Allow -Protocol TCP -LocalPort 8250'
 
-    if ($status -ne $null) {
+    if ($null -ne $status) {
         (Get-Date).ToString() + ' nc-management-port inbound rule defined successfully' >> C:\NCache-Init-Status.txt    
     }
 
     $status = Invoke-Expression -Command 'New-NetFirewallRule -DisplayName nc-management-port -Direction Outbound -Action Allow -Protocol TCP -LocalPort 8250'
 
-    if ($status -ne $null) {
+    if ($null -ne $status) {
         (Get-Date).ToString() + ' nc-management-port outbound rule defined successfully' >> C:\NCache-Init-Status.txt    
     }
 
     $status = Invoke-Expression -Command 'New-NetFirewallRule -DisplayName nc-server-port -Direction Inbound -Action Allow -Protocol TCP -LocalPort 9800'
 
-    if ($status -ne $null) {
+    if ($null -ne $status) {
         (Get-Date).ToString() + ' nc-server-port inbound rule defined successfully' >> C:\NCache-Init-Status.txt    
     }
 
     $status = Invoke-Expression -Command 'New-NetFirewallRule -DisplayName nc-server-port -Direction Outbound -Action Allow -Protocol TCP -LocalPort 9800'
 
-    if ($status -ne $null) {
+    if ($null -ne $status) {
         (Get-Date).ToString() + ' nc-server-port outbound rule defined successfully' >> C:\NCache-Init-Status.txt    
     }
 
     $status = Invoke-Expression -Command 'New-NetFirewallRule -DisplayName nc-cluster-management-port -Direction Inbound -Action Allow -Protocol TCP -LocalPort 8300-8399'
 
-    if ($status -ne $null) {
+    if ($null -ne $status) {
         (Get-Date).ToString() + ' nc-cluster-management-port inbound rule defined successfully' >> C:\NCache-Init-Status.txt    
     }
 
     $status = Invoke-Expression -Command 'New-NetFirewallRule -DisplayName nc-cluster-management-port -Direction Outbound -Action Allow -Protocol TCP -LocalPort 8300-8399'
 
-    if ($status -ne $null) {
+    if ($null -ne $status) {
         (Get-Date).ToString() + ' nc-cluster-management-port outbound rule defined successfully' >> C:\NCache-Init-Status.txt 
     }
 }
@@ -81,20 +81,39 @@ function RegisterNCache
     }
 
     if ($Key -ne "") {
-        
-        if ($Extension) {
-            $NActivateExpression = '& "C:\Program Files\NCache\bin\NActivate\NActivate.exe" -k ' + $Key + ' -f "' + $FirstName + '" -l "' + $LastName + '" -e "' + $Email + '" -comp "' + $Company + '" -ext'
-        }
-        else {
-            $NActivateExpression = '& "C:\Program Files\NCache\bin\NActivate\NActivate.exe" -RegisterNCacheForEvaluation -k ' + $Key + ' -f "' + $FirstName + '" -l "' + $LastName + '" -e "' + $Email + '" -comp "' + $Company + '" -EvaluationKey'
-        }
 
-        try {
-            Invoke-Expression -Command $NActivateExpression >> C:\NCache-Init-Status.txt
-        }
-        catch {
-            $_.Exception.Message >> C:\NCache-Init-Status.txt
-        }
+        $EVAL_SUCCESS = "NCache has been successfully registered for FREE evaluation on server"
+        $EXT_SUCCESS = "NCache evaluation period has been extended"
+        $TOTAL_RETRIES = 15
+        $RETRY_DELAY = 120
+        $retries = 0
+    
+        while ($retries -lt $TOTAL_RETRIES) {
+            
+            if ($Extension) {
+                $NActivateExpression = '& "C:\Program Files\NCache\bin\NActivate\NActivate.exe" -k ' + $Key + ' -f "' + $FirstName + '" -l "' + $LastName + '" -e "' + $Email + '" -comp "' + $Company + '" -ext'
+            } else {
+                $NActivateExpression = '& "C:\Program Files\NCache\bin\NActivate\NActivate.exe" -RegisterNCacheForEvaluation -k ' + $Key + ' -f "' + $FirstName + '" -l "' + $LastName + '" -e "' + $Email + '" -comp "' + $Company + '" -EvaluationKey'
+            }
+    
+            try {
+                $response = Invoke-Expression -Command $NActivateExpression 
+                $response >> C:\NCache-Init-Status.txt
+
+                if ($response.Contains($EVAL_SUCCESS) -or $response.Contains($EXT_SUCCESS)) {
+                    break;
+                }
+                else {
+                    Start-Sleep -seconds $RETRY_DELAY
+                    $retries++;
+                }
+            }
+            catch {
+                $_.Exception.Message >> C:\NCache-Init-Status.txt
+                Start-Sleep -seconds $RETRY_DELAY
+                $retries++;
+            }	
+        }       
     }
 }
 
@@ -130,9 +149,13 @@ function PlaceActivateJson
 }
 
 if (!(Test-Path C:\NCache-Init-Status.txt)) {
+
+    $STARTUP_DELAY = 30
+    Start-Sleep -seconds $STARTUP_DELAY
+
     SetFirewallRules
+    SetRegistryValues
+    PlaceActivateJson
     RegisterNCache
-	SetRegistryValues
-	PlaceActivateJson
     RestartNCacheService
 }
