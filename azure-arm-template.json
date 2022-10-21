@@ -178,10 +178,10 @@
     {
       "type": "Microsoft.Compute/virtualMachines",
       "apiVersion": "2021-04-01",
-      "name": "[concat(parameters('VirtualMachineNamePrefix'), copyIndex(parameters('ExistingVmCount')))]",
+      "name": "[concat(parameters('VirtualMachineNamePrefix'), copyIndex(parameters('ExistingVmCount') + 1))]",
       "location": "[parameters('Location')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Network/networkInterfaces/', concat(parameters('NetworkInterfaceName'), copyIndex(parameters('ExistingVmCount'))))]"
+        "[resourceId('Microsoft.Network/networkInterfaces/', concat(parameters('NetworkInterfaceName'), copyIndex(parameters('ExistingVmCount') + 1)))]"
       ],
       "plan": {
         "name": "[parameters('PlanName')]",
@@ -190,7 +190,7 @@
       },
       "properties": {
         "osProfile": {
-          "computerName": "[concat(parameters('VirtualMachineNamePrefix'), copyIndex(parameters('ExistingVmCount')))]",
+          "computerName": "[concat(parameters('VirtualMachineNamePrefix'), copyIndex(parameters('ExistingVmCount') + 1))]",
           "adminUsername": "[parameters('AdminUsername')]",
           "adminPassword": "[parameters('AdminPassword')]",
           "windowsConfiguration": {
@@ -219,7 +219,7 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('NetworkInterfaceName'), copyIndex(parameters('ExistingVmCount'))))]"
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(parameters('NetworkInterfaceName'), copyIndex(parameters('ExistingVmCount') + 1)))]"
             }
           ]
         }
@@ -233,10 +233,10 @@
     {
       "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2017-11-01",
-      "name": "[concat(parameters('NetworkInterfaceName'), copyIndex(parameters('ExistingVmCount')))]",
+      "name": "[concat(parameters('NetworkInterfaceName'), copyIndex(parameters('ExistingVmCount') + 1))]",
       "location": "[parameters('Location')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Network/publicIpAddresses/', concat(parameters('PublicIpAddressName'), copyIndex(parameters('ExistingVmCount'))))]",
+        "[resourceId('Microsoft.Network/publicIpAddresses/', concat(parameters('PublicIpAddressName'), copyIndex(parameters('ExistingVmCount') + 1)))]",
         "[parameters('NetworkSecurityGroupName')]"
       ],
       "properties": {
@@ -249,7 +249,7 @@
               },
               "privateIPAllocationMethod": "Dynamic",
               "publicIpAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIpAddresses', concat(parameters('PublicIpAddressName'), copyIndex(parameters('ExistingVmCount'))))]"
+                "id": "[resourceId('Microsoft.Network/publicIpAddresses', concat(parameters('PublicIpAddressName'), copyIndex(parameters('ExistingVmCount') + 1)))]"
               }
             }
           }
@@ -267,7 +267,7 @@
     {
       "type": "Microsoft.Network/publicIpAddresses",
       "apiVersion": "2017-11-01",
-      "name": "[concat(parameters('PublicIpAddressName'), copyIndex(parameters('ExistingVmCount')))]",
+      "name": "[concat(parameters('PublicIpAddressName'), copyIndex(parameters('ExistingVmCount') + 1))]",
       "location": "[parameters('Location')]",
       "tags": {
         "ipAddress": "ipAddresses"
