@@ -124,15 +124,6 @@ function SetRegistryValues
 	}
 	catch {
 		$_.Exception.Message >> C:\NCache-Init-Status.txt
-	}
-	
-	try {
-		if ($StagingCloudURL -ne "") {
-			Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Alachisoft\\NCache\\UserInfo' -Name cloud-url -Value $StagingCloudURL
-		}
-	}
-	catch {
-		$_.Exception.Message >> C:\NCache-Init-Status.txt
 	}	
 }
 
