@@ -50,16 +50,25 @@
         "Edition": {
             "Type": "Number"
         },
-        "Index": {
-            "Type": "Number"
-        },
         "VirtualMachineNamePrefix": {
             "Type": "Number"
         },
         "VirtualMachineSize": {
             "Type": "Number"
         },
-        "ExistingVmCount": {
+        "VmIndex1": {
+            "Type": "Number"
+        },
+        "VmIndex2": {
+            "Type": "Number"
+        },
+        "VmIndex3": {
+            "Type": "Number"
+        },
+        "VmIndex4": {
+            "Type": "Number"
+        },
+        "VmIndex5": {
             "Type": "Number"
         },
         "OperatingSystem": {
@@ -198,13 +207,11 @@
                                 "",
                                 [
                                     {
-                                        "Ref": "Environment"
+                                        "Ref": "VirtualMachineNamePrefix"
                                     },
-                                    "-server-",
                                     {
-                                        "Ref": "Index"
-                                    },
-                                    "-1"
+                                        "Ref": "VmIndex1"
+                                    }
                                 ]
                             ]
                         }
@@ -219,7 +226,7 @@
                                     "",
                                     [
                                         "<powershell>\n",
-                                        "Invoke-WebRequest -Uri https://armtestahmed.blob.core.windows.net/blobtest/NCacheConfiguration.ps1 -OutFile C:/NCacheConfigurationAWS.ps1;C:/NCacheConfigurationAWS.ps1 -serverIP \" \" -Key \"",
+                                        "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/HassaanYounas/ncache-arm-template-test/main/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
                                         {
                                             "Ref": "Key"
                                         },
@@ -247,11 +254,11 @@
                                         {
                                             "Ref": "StagingActivateJsonURL"
                                         },
-                                        "\" -Extension ",
+                                        "\" -Extension $",
                                         {
                                             "Ref": "Extension"
                                         },
-                                        "\" -InstallType \"",
+                                        " -InstallType \"",
                                         {
                                             "Ref": "InstallType"
                                         },
@@ -358,13 +365,11 @@
                                 "",
                                 [
                                     {
-                                        "Ref": "Environment"
+                                        "Ref": "VirtualMachineNamePrefix"
                                     },
-                                    "-server-",
                                     {
-                                        "Ref": "Index"
-                                    },
-                                    "-2"
+                                        "Ref": "VmIndex2"
+                                    }
                                 ]
                             ]
                         }
@@ -379,17 +384,7 @@
                                     "",
                                     [
                                         "<powershell>\n",
-                                        "Invoke-WebRequest -Uri https://armtestahmed.blob.core.windows.net/blobtest/NCacheConfiguration.ps1 -OutFile C:/NCacheConfigurationAWS.ps1;C:/NCacheConfigurationAWS.ps1 -serverIP \"",
-                                        {
-                                            "Fn::GetAtt": [
-                                                "EC2Instance1",
-                                                "PrivateIp"
-                                            ]
-                                        },
-                                        "\" -Key \"",
-                                        {
-                                            "Ref": "Key"
-                                        },
+                                        "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/HassaanYounas/ncache-arm-template-test/main/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
                                         {
                                             "Ref": "Key"
                                         },
@@ -417,11 +412,11 @@
                                         {
                                             "Ref": "StagingActivateJsonURL"
                                         },
-                                        "\" -Extension ",
+                                        "\" -Extension $",
                                         {
                                             "Ref": "Extension"
                                         },
-                                        "\" -InstallType \"",
+                                        " -InstallType \"",
                                         {
                                             "Ref": "InstallType"
                                         },
@@ -436,14 +431,7 @@
                                 "Fn::Join": [
                                     "",
                                     [
-                                        "#!/bin/sh\n wget -O /tmp/NCacheConfigurationLinux.sh https://armtestahmed.blob.core.windows.net/blobtest/NCacheConfigurationLinux.sh; chmod +x /tmp/NCacheConfigurationLinux.sh; /tmp/NCacheConfigurationLinux.sh -serverIP \"",
-                                        {
-                                            "Fn::GetAtt": [
-                                                "EC2Instance1",
-                                                "PrivateIp"
-                                            ]
-                                        },
-                                        "\" -licenseKey \"",
+                                        "#!/bin/sh\n wget -O /tmp/NCacheConfigurationLinux.sh https://armtestahmed.blob.core.windows.net/blobtest/NCacheConfigurationLinux.sh; chmod +x /tmp/NCacheConfigurationLinux.sh; /tmp/NCacheConfigurationLinux.sh -serverIP \" \" -licenseKey \"",
                                         {
                                             "Ref": "LicenseKey"
                                         },
@@ -489,7 +477,7 @@
             "Condition": "Launch3",
             "DependsOn": [
                 "EC2Instance1",
-                "EC2Instance2"
+                "EC2Instance2",
             ],
             "Properties": {
                 "ImageId": {
@@ -536,13 +524,11 @@
                                 "",
                                 [
                                     {
-                                        "Ref": "Environment"
+                                        "Ref": "VirtualMachineNamePrefix"
                                     },
-                                    "-server-",
                                     {
-                                        "Ref": "Index"
-                                    },
-                                    "-3"
+                                        "Ref": "VmIndex3"
+                                    }
                                 ]
                             ]
                         }
@@ -557,17 +543,7 @@
                                     "",
                                     [
                                         "<powershell>\n",
-                                        "Invoke-WebRequest -Uri https://armtestahmed.blob.core.windows.net/blobtest/NCacheConfiguration.ps1 -OutFile C:/NCacheConfigurationAWS.ps1;C:/NCacheConfigurationAWS.ps1 -serverIP \"",
-                                        {
-                                            "Fn::GetAtt": [
-                                                "EC2Instance1",
-                                                "PrivateIp"
-                                            ]
-                                        },
-                                        "\" -Key \"",
-                                        {
-                                            "Ref": "Key"
-                                        },
+                                        "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/HassaanYounas/ncache-arm-template-test/main/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
                                         {
                                             "Ref": "Key"
                                         },
@@ -595,11 +571,11 @@
                                         {
                                             "Ref": "StagingActivateJsonURL"
                                         },
-                                        "\" -Extension ",
+                                        "\" -Extension $",
                                         {
                                             "Ref": "Extension"
                                         },
-                                        "\" -InstallType \"",
+                                        " -InstallType \"",
                                         {
                                             "Ref": "InstallType"
                                         },
@@ -614,14 +590,7 @@
                                 "Fn::Join": [
                                     "",
                                     [
-                                        "#!/bin/sh\n wget -O /tmp/NCacheConfigurationLinux.sh https://armtestahmed.blob.core.windows.net/blobtest/NCacheConfigurationLinux.sh; chmod +x /tmp/NCacheConfigurationLinux.sh; /tmp/NCacheConfigurationLinux.sh -serverIP \"",
-                                        {
-                                            "Fn::GetAtt": [
-                                                "EC2Instance1",
-                                                "PrivateIp"
-                                            ]
-                                        },
-                                        "\" -licenseKey \"",
+                                        "#!/bin/sh\n wget -O /tmp/NCacheConfigurationLinux.sh https://armtestahmed.blob.core.windows.net/blobtest/NCacheConfigurationLinux.sh; chmod +x /tmp/NCacheConfigurationLinux.sh; /tmp/NCacheConfigurationLinux.sh -serverIP \" \" -licenseKey \"",
                                         {
                                             "Ref": "LicenseKey"
                                         },
@@ -668,7 +637,7 @@
             "DependsOn": [
                 "EC2Instance1",
                 "EC2Instance2",
-                "EC2Instance3"
+                "EC2Instance3",
             ],
             "Properties": {
                 "ImageId": {
@@ -715,13 +684,11 @@
                                 "",
                                 [
                                     {
-                                        "Ref": "Environment"
+                                        "Ref": "VirtualMachineNamePrefix"
                                     },
-                                    "-server-",
                                     {
-                                        "Ref": "Index"
-                                    },
-                                    "-4"
+                                        "Ref": "VmIndex4"
+                                    }
                                 ]
                             ]
                         }
@@ -736,17 +703,7 @@
                                     "",
                                     [
                                         "<powershell>\n",
-                                        "Invoke-WebRequest -Uri https://armtestahmed.blob.core.windows.net/blobtest/NCacheConfiguration.ps1 -OutFile C:/NCacheConfigurationAWS.ps1;C:/NCacheConfigurationAWS.ps1 -serverIP \"",
-                                        {
-                                            "Fn::GetAtt": [
-                                                "EC2Instance1",
-                                                "PrivateIp"
-                                            ]
-                                        },
-                                        "\" -Key \"",
-                                        {
-                                            "Ref": "Key"
-                                        },
+                                        "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/HassaanYounas/ncache-arm-template-test/main/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
                                         {
                                             "Ref": "Key"
                                         },
@@ -774,11 +731,11 @@
                                         {
                                             "Ref": "StagingActivateJsonURL"
                                         },
-                                        "\" -Extension ",
+                                        "\" -Extension $",
                                         {
                                             "Ref": "Extension"
                                         },
-                                        "\" -InstallType \"",
+                                        " -InstallType \"",
                                         {
                                             "Ref": "InstallType"
                                         },
@@ -793,14 +750,7 @@
                                 "Fn::Join": [
                                     "",
                                     [
-                                        "#!/bin/sh\n wget -O /tmp/NCacheConfigurationLinux.sh https://armtestahmed.blob.core.windows.net/blobtest/NCacheConfigurationLinux.sh; chmod +x /tmp/NCacheConfigurationLinux.sh; /tmp/NCacheConfigurationLinux.sh -serverIP \"",
-                                        {
-                                            "Fn::GetAtt": [
-                                                "EC2Instance1",
-                                                "PrivateIp"
-                                            ]
-                                        },
-                                        "\" -licenseKey \"",
+                                        "#!/bin/sh\n wget -O /tmp/NCacheConfigurationLinux.sh https://armtestahmed.blob.core.windows.net/blobtest/NCacheConfigurationLinux.sh; chmod +x /tmp/NCacheConfigurationLinux.sh; /tmp/NCacheConfigurationLinux.sh -serverIP \" \" -licenseKey \"",
                                         {
                                             "Ref": "LicenseKey"
                                         },
@@ -843,12 +793,12 @@
         },
         "EC2Instance5": {
             "Type": "AWS::EC2::Instance",
-            "Condition": "Launch5",
+            "Condition": "Launch3",
             "DependsOn": [
                 "EC2Instance1",
                 "EC2Instance2",
                 "EC2Instance3",
-                "EC2Instance4"
+                "EC2Instance4",
             ],
             "Properties": {
                 "ImageId": {
@@ -895,13 +845,11 @@
                                 "",
                                 [
                                     {
-                                        "Ref": "Environment"
+                                        "Ref": "VirtualMachineNamePrefix"
                                     },
-                                    "-server-",
                                     {
-                                        "Ref": "Index"
-                                    },
-                                    "-5"
+                                        "Ref": "VmIndex5"
+                                    }
                                 ]
                             ]
                         }
@@ -916,17 +864,7 @@
                                     "",
                                     [
                                         "<powershell>\n",
-                                        "Invoke-WebRequest -Uri https://armtestahmed.blob.core.windows.net/blobtest/NCacheConfiguration.ps1 -OutFile C:/NCacheConfigurationAWS.ps1;C:/NCacheConfigurationAWS.ps1 -serverIP \"",
-                                        {
-                                            "Fn::GetAtt": [
-                                                "EC2Instance1",
-                                                "PrivateIp"
-                                            ]
-                                        },
-                                        "\" -Key \"",
-                                        {
-                                            "Ref": "Key"
-                                        },
+                                        "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/HassaanYounas/ncache-arm-template-test/main/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
                                         {
                                             "Ref": "Key"
                                         },
@@ -954,11 +892,11 @@
                                         {
                                             "Ref": "StagingActivateJsonURL"
                                         },
-                                        "\" -Extension ",
+                                        "\" -Extension $",
                                         {
                                             "Ref": "Extension"
                                         },
-                                        "\" -InstallType \"",
+                                        " -InstallType \"",
                                         {
                                             "Ref": "InstallType"
                                         },
@@ -973,53 +911,39 @@
                                 "Fn::Join": [
                                     "",
                                     [
-                                        "#!/bin/sh\n wget -O /tmp/NCacheConfigurationLinux.sh https://armtestahmed.blob.core.windows.net/blobtest/NCacheConfigurationLinux.sh; chmod +x /tmp/NCacheConfigurationLinux.sh; /tmp/NCacheConfigurationLinux.sh -serverIP \"",
+                                        "#!/bin/sh\n wget -O /tmp/NCacheConfigurationLinux.sh https://armtestahmed.blob.core.windows.net/blobtest/NCacheConfigurationLinux.sh; chmod +x /tmp/NCacheConfigurationLinux.sh; /tmp/NCacheConfigurationLinux.sh -serverIP \" \" -licenseKey \"",
                                         {
-                                            "Fn::GetAtt": [
-                                                "EC2Instance1",
-                                                "PrivateIp"
-                                            ]
+                                            "Ref": "LicenseKey"
                                         },
-                                        "\" -Key \"",
-                                        {
-                                            "Ref": "Key"
-                                        },
-                                        {
-                                            "Ref": "Key"
-                                        },
-                                        "\" -FirstName \"",
+                                        "\" -firstName \"",
                                         {
                                             "Ref": "FirstName"
                                         },
-                                        "\" -LastName \"",
+                                        "\" -lastName \"",
                                         {
                                             "Ref": "LastName"
                                         },
-                                        "\" -Email \"",
+                                        "\" -emailAddress \"",
                                         {
-                                            "Ref": "Email"
+                                            "Ref": "EmailAddress"
                                         },
-                                        "\" -Company \"",
+                                        "\" -company \"",
                                         {
                                             "Ref": "Company"
                                         },
-                                        "\" -StagingCloudURL \"",
+                                        "\" -environment \"",
                                         {
-                                            "Ref": "StagingCloudURL"
+                                            "Ref": "Environment"
                                         },
-                                        "\" -StagingActivateJsonURL \"",
+                                        "\" -numberOfClients \"",
                                         {
-                                            "Ref": "StagingActivateJsonURL"
+                                            "Ref": "NumberOfClients"
                                         },
-                                        "\" -Extension ",
+                                        "\" -Edition ",
                                         {
-                                            "Ref": "Extension"
+                                            "Ref": "Edition"
                                         },
-                                        "\" -InstallType \"",
-                                        {
-                                            "Ref": "InstallType"
-                                        },
-                                        "\" \n",
+                                        " -vendor \"aws\"\n"
                                     ]
                                 ]
                             }
