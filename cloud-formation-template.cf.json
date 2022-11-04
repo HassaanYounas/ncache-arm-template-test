@@ -263,39 +263,7 @@
                                 "Fn::Join": [
                                     "",
                                     [
-                                        "#!/bin/sh\n wget -O /tmp/NCacheConfigurationLinux.sh https://armtestahmed.blob.core.windows.net/blobtest/NCacheConfigurationLinux.sh; chmod +x /tmp/NCacheConfigurationLinux.sh; /tmp/NCacheConfigurationLinux.sh -serverIP \" \" -licenseKey \"",
-                                        {
-                                            "Ref": "LicenseKey"
-                                        },
-                                        "\" -firstName \"",
-                                        {
-                                            "Ref": "FirstName"
-                                        },
-                                        "\" -lastName \"",
-                                        {
-                                            "Ref": "LastName"
-                                        },
-                                        "\" -emailAddress \"",
-                                        {
-                                            "Ref": "EmailAddress"
-                                        },
-                                        "\" -company \"",
-                                        {
-                                            "Ref": "Company"
-                                        },
-                                        "\" -environment \"",
-                                        {
-                                            "Ref": "Environment"
-                                        },
-                                        "\" -numberOfClients \"",
-                                        {
-                                            "Ref": "NumberOfClients"
-                                        },
-                                        "\" -Edition ",
-                                        {
-                                            "Ref": "Edition"
-                                        },
-                                        " -vendor \"aws\"\n"
+                                        "#"
                                     ]
                                 ]
                             }
@@ -417,39 +385,7 @@
                                 "Fn::Join": [
                                     "",
                                     [
-                                        "#!/bin/sh\n wget -O /tmp/NCacheConfigurationLinux.sh https://armtestahmed.blob.core.windows.net/blobtest/NCacheConfigurationLinux.sh; chmod +x /tmp/NCacheConfigurationLinux.sh; /tmp/NCacheConfigurationLinux.sh -serverIP \" \" -licenseKey \"",
-                                        {
-                                            "Ref": "LicenseKey"
-                                        },
-                                        "\" -firstName \"",
-                                        {
-                                            "Ref": "FirstName"
-                                        },
-                                        "\" -lastName \"",
-                                        {
-                                            "Ref": "LastName"
-                                        },
-                                        "\" -emailAddress \"",
-                                        {
-                                            "Ref": "EmailAddress"
-                                        },
-                                        "\" -company \"",
-                                        {
-                                            "Ref": "Company"
-                                        },
-                                        "\" -environment \"",
-                                        {
-                                            "Ref": "Environment"
-                                        },
-                                        "\" -numberOfClients \"",
-                                        {
-                                            "Ref": "NumberOfClients"
-                                        },
-                                        "\" -Edition ",
-                                        {
-                                            "Ref": "Edition"
-                                        },
-                                        " -vendor \"aws\"\n"
+                                        "#"
                                     ]
                                 ]
                             }
@@ -572,39 +508,7 @@
                                 "Fn::Join": [
                                     "",
                                     [
-                                        "#!/bin/sh\n wget -O /tmp/NCacheConfigurationLinux.sh https://armtestahmed.blob.core.windows.net/blobtest/NCacheConfigurationLinux.sh; chmod +x /tmp/NCacheConfigurationLinux.sh; /tmp/NCacheConfigurationLinux.sh -serverIP \" \" -licenseKey \"",
-                                        {
-                                            "Ref": "LicenseKey"
-                                        },
-                                        "\" -firstName \"",
-                                        {
-                                            "Ref": "FirstName"
-                                        },
-                                        "\" -lastName \"",
-                                        {
-                                            "Ref": "LastName"
-                                        },
-                                        "\" -emailAddress \"",
-                                        {
-                                            "Ref": "EmailAddress"
-                                        },
-                                        "\" -company \"",
-                                        {
-                                            "Ref": "Company"
-                                        },
-                                        "\" -environment \"",
-                                        {
-                                            "Ref": "Environment"
-                                        },
-                                        "\" -numberOfClients \"",
-                                        {
-                                            "Ref": "NumberOfClients"
-                                        },
-                                        "\" -Edition ",
-                                        {
-                                            "Ref": "Edition"
-                                        },
-                                        " -vendor \"aws\"\n"
+                                        "#"
                                     ]
                                 ]
                             }
@@ -728,39 +632,7 @@
                                 "Fn::Join": [
                                     "",
                                     [
-                                        "#!/bin/sh\n wget -O /tmp/NCacheConfigurationLinux.sh https://armtestahmed.blob.core.windows.net/blobtest/NCacheConfigurationLinux.sh; chmod +x /tmp/NCacheConfigurationLinux.sh; /tmp/NCacheConfigurationLinux.sh -serverIP \" \" -licenseKey \"",
-                                        {
-                                            "Ref": "LicenseKey"
-                                        },
-                                        "\" -firstName \"",
-                                        {
-                                            "Ref": "FirstName"
-                                        },
-                                        "\" -lastName \"",
-                                        {
-                                            "Ref": "LastName"
-                                        },
-                                        "\" -emailAddress \"",
-                                        {
-                                            "Ref": "EmailAddress"
-                                        },
-                                        "\" -company \"",
-                                        {
-                                            "Ref": "Company"
-                                        },
-                                        "\" -environment \"",
-                                        {
-                                            "Ref": "Environment"
-                                        },
-                                        "\" -numberOfClients \"",
-                                        {
-                                            "Ref": "NumberOfClients"
-                                        },
-                                        "\" -Edition ",
-                                        {
-                                            "Ref": "Edition"
-                                        },
-                                        " -vendor \"aws\"\n"
+                                        "#"
                                     ]
                                 ]
                             }
@@ -885,39 +757,7 @@
                                 "Fn::Join": [
                                     "",
                                     [
-                                        "#!/bin/sh\n wget -O /tmp/NCacheConfigurationLinux.sh https://armtestahmed.blob.core.windows.net/blobtest/NCacheConfigurationLinux.sh; chmod +x /tmp/NCacheConfigurationLinux.sh; /tmp/NCacheConfigurationLinux.sh -serverIP \" \" -licenseKey \"",
-                                        {
-                                            "Ref": "LicenseKey"
-                                        },
-                                        "\" -firstName \"",
-                                        {
-                                            "Ref": "FirstName"
-                                        },
-                                        "\" -lastName \"",
-                                        {
-                                            "Ref": "LastName"
-                                        },
-                                        "\" -emailAddress \"",
-                                        {
-                                            "Ref": "EmailAddress"
-                                        },
-                                        "\" -company \"",
-                                        {
-                                            "Ref": "Company"
-                                        },
-                                        "\" -environment \"",
-                                        {
-                                            "Ref": "Environment"
-                                        },
-                                        "\" -numberOfClients \"",
-                                        {
-                                            "Ref": "NumberOfClients"
-                                        },
-                                        "\" -Edition ",
-                                        {
-                                            "Ref": "Edition"
-                                        },
-                                        " -vendor \"aws\"\n"
+                                        "#"
                                     ]
                                 ]
                             }
