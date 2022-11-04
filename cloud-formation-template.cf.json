@@ -45,10 +45,10 @@
             "Type": "String"
         },
         "Edition": {
-            "Type": "Number"
+            "Type": "String"
         },
         "VirtualMachineNamePrefix": {
-            "Type": "Number"
+            "Type": "String"
         },
         "VmIndex1": {
             "Type": "Number"
