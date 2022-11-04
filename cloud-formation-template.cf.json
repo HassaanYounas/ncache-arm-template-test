@@ -8,9 +8,6 @@
         "InstallType": {
             "Type": "String"
         },
-        "StagingCloudURL": {
-            "Type": "String"
-        },
         "StagingActivateJsonURL": {
             "Type": "String"
         },
@@ -243,10 +240,6 @@
                                         {
                                             "Ref": "Company"
                                         },
-                                        "\" -StagingCloudURL \"",
-                                        {
-                                            "Ref": "StagingCloudURL"
-                                        },
                                         "\" -StagingActivateJsonURL \"",
                                         {
                                             "Ref": "StagingActivateJsonURL"
@@ -400,10 +393,6 @@
                                         "\" -Company \"",
                                         {
                                             "Ref": "Company"
-                                        },
-                                        "\" -StagingCloudURL \"",
-                                        {
-                                            "Ref": "StagingCloudURL"
                                         },
                                         "\" -StagingActivateJsonURL \"",
                                         {
@@ -559,10 +548,6 @@
                                         "\" -Company \"",
                                         {
                                             "Ref": "Company"
-                                        },
-                                        "\" -StagingCloudURL \"",
-                                        {
-                                            "Ref": "StagingCloudURL"
                                         },
                                         "\" -StagingActivateJsonURL \"",
                                         {
@@ -720,10 +705,6 @@
                                         {
                                             "Ref": "Company"
                                         },
-                                        "\" -StagingCloudURL \"",
-                                        {
-                                            "Ref": "StagingCloudURL"
-                                        },
                                         "\" -StagingActivateJsonURL \"",
                                         {
                                             "Ref": "StagingActivateJsonURL"
@@ -880,10 +861,6 @@
                                         "\" -Company \"",
                                         {
                                             "Ref": "Company"
-                                        },
-                                        "\" -StagingCloudURL \"",
-                                        {
-                                            "Ref": "StagingCloudURL"
                                         },
                                         "\" -StagingActivateJsonURL \"",
                                         {
