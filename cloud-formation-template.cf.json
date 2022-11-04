@@ -3,7 +3,7 @@
     "Description": "This cloudformation template allows a user to automatically deploy NCache and configure it on AWS EC2 Instances. A user can create NCache cluster containing upto 5 nodes using this template. Network configuration is provided by the user and Amazon EC2 configuration is done by the template.",
     "Parameters": {
         "Extension": {
-            "Type": "Number"
+            "Type": "String"
         },
         "InstallType": {
             "Type": "String"
