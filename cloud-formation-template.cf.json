@@ -53,9 +53,6 @@
         "VirtualMachineNamePrefix": {
             "Type": "Number"
         },
-        "VirtualMachineSize": {
-            "Type": "Number"
-        },
         "VmIndex1": {
             "Type": "Number"
         },
