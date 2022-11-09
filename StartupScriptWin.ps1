@@ -91,9 +91,9 @@ function RegisterNCache
         while ($retries -lt $TOTAL_RETRIES) {
             
             if ($Extension) {
-                $NActivateExpression = '& "C:\Program Files\NCache\bin\NActivate\NActivate.exe" -k ' + $Key + ' -f "' + $FirstName + '" -l "' + $LastName + '" -e "' + $Email + '" -comp "' + $Company + '" -ext'
+                $NActivateExpression = '& "Register-NCache" -Key ' + $Key + ' -FirstName "' + $FirstName + '" -LastName "' + $LastName + '" -Email "' + $Email + '" -Company "' + $Company + '" -KeyType Extension'
             } else {
-                $NActivateExpression = '& "C:\Program Files\NCache\bin\NActivate\NActivate.exe" -RegisterNCacheForEvaluation -k ' + $Key + ' -f "' + $FirstName + '" -l "' + $LastName + '" -e "' + $Email + '" -comp "' + $Company + '" -EvaluationKey'
+                $NActivateExpression = '& "Register-NCacheEvaluation" -Key ' + $Key + ' -FirstName "' + $FirstName + '" -LastName "' + $LastName + '" -Email "' + $Email + '" -Company "' + $Company + '"'
             }
     
             try {
