@@ -99,7 +99,14 @@ function RegisterNCache
             try {
                 $response = Invoke-Expression -Command $NActivateExpression 
                 $response >> C:\NCache-Init-Status.txt
-                break
+                
+		if ($response.Contains($EVAL_SUCCESS) -or $response.Contains($EXT_SUCCESS)) {
+                    break;
+                }
+                else {
+                    Start-Sleep -seconds $RETRY_DELAY
+                    $retries++;
+                }
             }
             catch {
                 $_.Exception.Message >> C:\NCache-Init-Status.txt
