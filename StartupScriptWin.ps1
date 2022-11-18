@@ -65,6 +65,7 @@ function RegisterNCache
 					$error >> C:\NCache-Init-Status.txt
 					Start-Sleep -seconds $RETRY_DELAY
 					$retries++;
+					$error.clear();
 				}
 				else
 				{
@@ -103,6 +104,9 @@ function PlaceActivateJson
 }
 
 if (!(Test-Path C:\NCache-Init-Status.txt)) {
+    
+    $STARTUP_DELAY = 30
+    Start-Sleep -seconds $STARTUP_DELAY
     
     SetRegistryValues
     PlaceActivateJson
