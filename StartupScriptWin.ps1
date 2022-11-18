@@ -60,20 +60,21 @@ function RegisterNCache
             try {
                 $response = Invoke-Expression -Command $NActivateExpression 
                 $response >> C:\NCache-Init-Status.txt
-		
-		if ([string]::IsNullOrEmpty($error)) {
-		    break;
-		}
-		else {
-		    $_.Exception.Message >> C:\NCache-Init-Status.txt
-		    Start-Sleep -seconds $RETRY_DELAY
-		    $retries++;
-		}
-            }
+
+				if (-not [string]::IsNullOrEmpty($error)) {
+					$error >> C:\NCache-Init-Status.txt
+					Start-Sleep -seconds $RETRY_DELAY
+					$retries++;
+				}
+				else
+				{
+					break;
+				}
+			}
             catch {
                 $_.Exception.Message >> C:\NCache-Init-Status.txt
-		Start-Sleep -seconds $RETRY_DELAY
-		$retries++;
+				Start-Sleep -seconds $RETRY_DELAY
+				$retries++;
             }	
         }       
     }
