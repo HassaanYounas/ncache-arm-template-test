@@ -45,7 +45,7 @@ function RegisterNCache
 
         $EVAL_SUCCESS = "NCache has been successfully registered for FREE evaluation on server"
         $EXT_SUCCESS = "NCache evaluation period has been extended"
-        $TOTAL_RETRIES = 5
+        $TOTAL_RETRIES = 10
         $RETRY_DELAY = 30
         $retries = 0
     
