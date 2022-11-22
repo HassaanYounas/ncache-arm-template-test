@@ -1,856 +1,866 @@
 {
-    "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "This cloudformation template allows a user to automatically deploy NCache and configure it on AWS EC2 Instances. A user can create NCache cluster containing upto 5 nodes using this template. Network configuration is provided by the user and Amazon EC2 configuration is done by the template.",
-    "Parameters": {
-        "Extension": {
-            "Type": "String"
-        },
-        "InstallType": {
-            "Type": "String"
-        },
-        "StagingActivateJsonURL": {
-            "Type": "String"
-        },
-        "Key": {
-            "Type": "String"
-        },
-        "VpcId": {
-            "Type": "String"
-        },
-        "SubnetID": {
-            "Type": "String"
-        },
-        "AmiID": {
-            "Type": "String"
-        },
-        "InstanceType": {
-            "Type": "String"
-        },
-        "InstanceCount": {
-            "Type": "Number"
-        },
-        "KeyName": {
-            "Type": "String"
-        },
-        "FirstName": {
-            "Type": "String"
-        },
-        "LastName": {
-            "Type": "String"
-        },
-        "Email": {
-            "Type": "String"
-        },
-        "Company": {
-            "Type": "String"
-        },
-        "Edition": {
-            "Type": "String"
-        },
-        "VirtualMachineNamePrefix": {
-            "Type": "String"
-        },
-        "VmIndex1": {
-            "Type": "Number"
-        },
-        "VmIndex2": {
-            "Type": "Number"
-        },
-        "VmIndex3": {
-            "Type": "Number"
-        },
-        "VmIndex4": {
-            "Type": "Number"
-        },
-        "VmIndex5": {
-            "Type": "Number"
-        },
-        "OperatingSystem": {
-            "Type": "String"
-        }
-    },
-    "Conditions": {
-        "Windows": {
-            "Fn::Equals": [
-                "windows",
-                {
-                    "Ref": "OperatingSystem"
-                }
-            ]
-        },
-        "Launch1": {
-            "Fn::Equals": [
-                1,
-                1
-            ]
-        },
-        "Launch2": {
-            "Fn::Not": [
-                {
-                    "Fn::Equals": [
+   "AWSTemplateFormatVersion":"2010-09-09",
+   "Description":"This cloudformation template allows a user to automatically deploy NCache and configure it on AWS EC2 Instances. A user can create NCache cluster containing upto 5 nodes using this template. Network configuration is provided by the user and Amazon EC2 configuration is done by the template.",
+   "Parameters":{
+      "Extension":{
+         "Type":"String"
+      },
+      "InstallType":{
+         "Type":"String"
+      },
+      "StagingActivateJsonURL":{
+         "Type":"String"
+      },
+      "Key":{
+         "Type":"String"
+      },
+      "VpcId":{
+         "Type":"String"
+      },
+      "SubnetID":{
+         "Type":"String"
+      },
+      "AmiID":{
+         "Type":"String"
+      },
+      "InstanceType":{
+         "Type":"String"
+      },
+      "InstanceCount":{
+         "Type":"Number"
+      },
+      "KeyName":{
+         "Type":"String"
+      },
+      "FirstName":{
+         "Type":"String"
+      },
+      "LastName":{
+         "Type":"String"
+      },
+      "Email":{
+         "Type":"String"
+      },
+      "Company":{
+         "Type":"String"
+      },
+      "Edition":{
+         "Type":"String"
+      },
+      "VirtualMachineNamePrefix":{
+         "Type":"String"
+      },
+      "VmIndex1":{
+         "Type":"Number"
+      },
+      "VmIndex2":{
+         "Type":"Number"
+      },
+      "VmIndex3":{
+         "Type":"Number"
+      },
+      "VmIndex4":{
+         "Type":"Number"
+      },
+      "VmIndex5":{
+         "Type":"Number"
+      },
+      "OperatingSystem":{
+         "Type":"String"
+      }
+   },
+   "Conditions":{
+      "Windows":{
+         "Fn::Equals":[
+            "windows",
+            {
+               "Ref":"OperatingSystem"
+            }
+         ]
+      },
+      "Launch1":{
+         "Fn::Equals":[
+            1,
+            1
+         ]
+      },
+      "Launch2":{
+         "Fn::Not":[
+            {
+               "Fn::Equals":[
+                  1,
+                  {
+                     "Ref":"InstanceCount"
+                  }
+               ]
+            }
+         ]
+      },
+      "Launch3":{
+         "Fn::And":[
+            {
+               "Fn::Not":[
+                  {
+                     "Fn::Equals":[
                         1,
                         {
-                            "Ref": "InstanceCount"
+                           "Ref":"InstanceCount"
                         }
-                    ]
-                }
-            ]
-        },
-        "Launch3": {
-            "Fn::And": [
-                {
-                    "Fn::Not": [
+                     ]
+                  }
+               ]
+            },
+            {
+               "Fn::Not":[
+                  {
+                     "Fn::Equals":[
+                        2,
                         {
-                            "Fn::Equals": [
-                                1,
-                                {
-                                    "Ref": "InstanceCount"
-                                }
-                            ]
+                           "Ref":"InstanceCount"
                         }
-                    ]
-                },
-                {
-                    "Fn::Not": [
-                        {
-                            "Fn::Equals": [
-                                2,
-                                {
-                                    "Ref": "InstanceCount"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        "Launch4": {
-            "Fn::Or": [
-                {
-                    "Fn::Equals": [
-                        4,
-                        {
-                            "Ref": "InstanceCount"
-                        }
-                    ]
-                },
-                {
-                    "Fn::Equals": [
-                        5,
-                        {
-                            "Ref": "InstanceCount"
-                        }
-                    ]
-                }
-            ]
-        },
-        "Launch5": {
-            "Fn::Equals": [
-                5,
-                {
-                    "Ref": "InstanceCount"
-                }
-            ]
-        }
-    },
-    "Resources": {
-        "EC2Instance1": {
-            "Type": "AWS::EC2::Instance",
-            "Properties": {
-                "ImageId": {
-                    "Ref": "AmiID"
-                },
-                "InstanceType": {
-                    "Ref": "InstanceType"
-                },
-                "KeyName": {
-                    "Ref": "KeyName"
-                },
-				"MetadataOptions": {
-					"InstanceMetadataTags" : "enabled"
-				},
-                "NetworkInterfaces": [
-                    {
-                        "AssociatePublicIpAddress": "true",
-                        "SubnetId": {
-                            "Ref": "SubnetID"
-                        },
-                        "GroupSet": [
-                            {
-                                "Ref": "InstanceSecurityGroup"
-                            }
-                        ],
-                        "DeviceIndex": "0"
-                    }
-                ],
-                "BlockDeviceMappings": [
-                    {
-                        "DeviceName": "/dev/sda1",
-                        "Ebs": {
-                            "VolumeType": "standard",
-                            "DeleteOnTermination": "true"
-                        }
-                    },
-                    {
-                        "DeviceName": "/dev/sdk",
-                        "NoDevice": {}
-                    }
-                ],
-                "Tags": [
-                    {
-                        "Key": "Name",
-                        "Value": {
-                            "Fn::Join": [
-                                "",
-                                [
-                                    {
-                                        "Ref": "VirtualMachineNamePrefix"
-                                    },
-                                    {
-                                        "Ref": "VmIndex1"
-                                    }
-                                ]
-                            ]
-                        }
-                    }
-                ],
-                "UserData": {
-                    "Fn::If": [
-                        "Windows",
-                        {
-                            "Fn::Base64": {
-                                "Fn::Join": [
-                                    "",
-                                    [
-                                        "<powershell>\n",
-                                        "Invoke-WebRequest -Uri 'https://ncachedeployments.s3.amazonaws.com/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
-                                        {
-                                            "Ref": "Key"
-                                        },
-                                        "\" -FirstName \"",
-                                        {
-                                            "Ref": "FirstName"
-                                        },
-                                        "\" -LastName \"",
-                                        {
-                                            "Ref": "LastName"
-                                        },
-                                        "\" -Email \"",
-                                        {
-                                            "Ref": "Email"
-                                        },
-                                        "\" -Company \"",
-                                        {
-                                            "Ref": "Company"
-                                        },
-                                        "\" -StagingActivateJsonURL \"",
-                                        {
-                                            "Ref": "StagingActivateJsonURL"
-                                        },
-                                        "\" -Extension $",
-                                        {
-                                            "Ref": "Extension"
-                                        },
-                                        " -InstallType \"",
-                                        {
-                                            "Ref": "InstallType"
-                                        },
-                                        "\" \n",
-                                        "</powershell>"
-                                    ]
-                                ]
-                            }
-                        },
-                        {
-                            "Fn::Base64": {
-                                "Fn::Join": [
-                                    "",
-                                    [
-                                        "#"
-                                    ]
-                                ]
-                            }
-                        }
-                    ]
-                }
+                     ]
+                  }
+               ]
             }
-        },
-        "EC2Instance2": {
-            "Type": "AWS::EC2::Instance",
-            "Condition": "Launch2",
-            "DependsOn": [
-                "EC2Instance1"
+         ]
+      },
+      "Launch4":{
+         "Fn::Or":[
+            {
+               "Fn::Equals":[
+                  4,
+                  {
+                     "Ref":"InstanceCount"
+                  }
+               ]
+            },
+            {
+               "Fn::Equals":[
+                  5,
+                  {
+                     "Ref":"InstanceCount"
+                  }
+               ]
+            }
+         ]
+      },
+      "Launch5":{
+         "Fn::Equals":[
+            5,
+            {
+               "Ref":"InstanceCount"
+            }
+         ]
+      }
+   },
+   "Resources":{
+      "EC2Instance1":{
+         "Type":"AWS::EC2::Instance",
+         "Properties":{
+            "ImageId":{
+               "Ref":"AmiID"
+            },
+            "InstanceType":{
+               "Ref":"InstanceType"
+            },
+            "KeyName":{
+               "Ref":"KeyName"
+            },
+            "MetadataOptions":{
+               "InstanceMetadataTags":"enabled"
+            },
+            "NetworkInterfaces":[
+               {
+                  "AssociatePublicIpAddress":"true",
+                  "SubnetId":{
+                     "Ref":"SubnetID"
+                  },
+                  "GroupSet":[
+                     {
+                        "Ref":"InstanceSecurityGroup"
+                     }
+                  ],
+                  "DeviceIndex":"0"
+               }
             ],
-            "Properties": {
-                "ImageId": {
-                    "Ref": "AmiID"
-                },
-                "InstanceType": {
-                    "Ref": "InstanceType"
-                },
-                "KeyName": {
-                    "Ref": "KeyName"
-                },
-				"MetadataOptions": {
-					"InstanceMetadataTags" : "enabled"
-				},
-                "NetworkInterfaces": [
-                    {
-                        "AssociatePublicIpAddress": "true",
-                        "SubnetId": {
-                            "Ref": "SubnetID"
-                        },
-                        "GroupSet": [
-                            {
-                                "Ref": "InstanceSecurityGroup"
-                            }
-                        ],
-                        "DeviceIndex": "0"
-                    }
-                ],
-                "BlockDeviceMappings": [
-                    {
-                        "DeviceName": "/dev/sda1",
-                        "Ebs": {
-                            "VolumeType": "standard",
-                            "DeleteOnTermination": "true"
-                        }
-                    },
-                    {
-                        "DeviceName": "/dev/sdk",
-                        "NoDevice": {}
-                    }
-                ],
-                "Tags": [
-                    {
-                        "Key": "Name",
-                        "Value": {
-                            "Fn::Join": [
-                                "",
-                                [
-                                    {
-                                        "Ref": "VirtualMachineNamePrefix"
-                                    },
-                                    {
-                                        "Ref": "VmIndex2"
-                                    }
-                                ]
-                            ]
-                        }
-                    }
-                ],
-                "UserData": {
-                    "Fn::If": [
-                        "Windows",
-                        {
-                            "Fn::Base64": {
-                                "Fn::Join": [
-                                    "",
-                                    [
-                                        "<powershell>\n",
-                                        "Invoke-WebRequest -Uri 'https://ncachedeployments.s3.amazonaws.com/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
-                                        {
-                                            "Ref": "Key"
-                                        },
-                                        "\" -FirstName \"",
-                                        {
-                                            "Ref": "FirstName"
-                                        },
-                                        "\" -LastName \"",
-                                        {
-                                            "Ref": "LastName"
-                                        },
-                                        "\" -Email \"",
-                                        {
-                                            "Ref": "Email"
-                                        },
-                                        "\" -Company \"",
-                                        {
-                                            "Ref": "Company"
-                                        },
-                                        "\" -StagingActivateJsonURL \"",
-                                        {
-                                            "Ref": "StagingActivateJsonURL"
-                                        },
-                                        "\" -Extension $",
-                                        {
-                                            "Ref": "Extension"
-                                        },
-                                        " -InstallType \"",
-                                        {
-                                            "Ref": "InstallType"
-                                        },
-                                        "\" \n",
-                                        "</powershell>"
-                                    ]
-                                ]
-                            }
-                        },
-                        {
-                            "Fn::Base64": {
-                                "Fn::Join": [
-                                    "",
-                                    [
-                                        "#"
-                                    ]
-                                ]
-                            }
-                        }
-                    ]
-                }
-            }
-        },
-        "EC2Instance3": {
-            "Type": "AWS::EC2::Instance",
-            "Condition": "Launch3",
-            "DependsOn": [
-                "EC2Instance1",
-                "EC2Instance2",
+            "BlockDeviceMappings":[
+               {
+                  "DeviceName":"/dev/sda1",
+                  "Ebs":{
+                     "VolumeType":"standard",
+                     "DeleteOnTermination":"true"
+                  }
+               },
+               {
+                  "DeviceName":"/dev/sdk",
+                  "NoDevice":{
+                     
+                  }
+               }
             ],
-            "Properties": {
-                "ImageId": {
-                    "Ref": "AmiID"
-                },
-                "InstanceType": {
-                    "Ref": "InstanceType"
-                },
-                "KeyName": {
-                    "Ref": "KeyName"
-                },
-				"MetadataOptions": {
-					"InstanceMetadataTags" : "enabled"
-				},
-                "NetworkInterfaces": [
-                    {
-                        "AssociatePublicIpAddress": "true",
-                        "SubnetId": {
-                            "Ref": "SubnetID"
-                        },
-                        "GroupSet": [
-                            {
-                                "Ref": "InstanceSecurityGroup"
-                            }
-                        ],
-                        "DeviceIndex": "0"
-                    }
-                ],
-                "BlockDeviceMappings": [
-                    {
-                        "DeviceName": "/dev/sda1",
-                        "Ebs": {
-                            "VolumeType": "standard",
-                            "DeleteOnTermination": "true"
-                        }
-                    },
-                    {
-                        "DeviceName": "/dev/sdk",
-                        "NoDevice": {}
-                    }
-                ],
-                "Tags": [
-                    {
-                        "Key": "Name",
-                        "Value": {
-                            "Fn::Join": [
-                                "",
-                                [
-                                    {
-                                        "Ref": "VirtualMachineNamePrefix"
-                                    },
-                                    {
-                                        "Ref": "VmIndex3"
-                                    }
-                                ]
-                            ]
-                        }
-                    }
-                ],
-                "UserData": {
-                    "Fn::If": [
-                        "Windows",
-                        {
-                            "Fn::Base64": {
-                                "Fn::Join": [
-                                    "",
-                                    [
-                                        "<powershell>\n",
-                                        "Invoke-WebRequest -Uri 'https://ncachedeployments.s3.amazonaws.com/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
-                                        {
-                                            "Ref": "Key"
-                                        },
-                                        "\" -FirstName \"",
-                                        {
-                                            "Ref": "FirstName"
-                                        },
-                                        "\" -LastName \"",
-                                        {
-                                            "Ref": "LastName"
-                                        },
-                                        "\" -Email \"",
-                                        {
-                                            "Ref": "Email"
-                                        },
-                                        "\" -Company \"",
-                                        {
-                                            "Ref": "Company"
-                                        },
-                                        "\" -StagingActivateJsonURL \"",
-                                        {
-                                            "Ref": "StagingActivateJsonURL"
-                                        },
-                                        "\" -Extension $",
-                                        {
-                                            "Ref": "Extension"
-                                        },
-                                        " -InstallType \"",
-                                        {
-                                            "Ref": "InstallType"
-                                        },
-                                        "\" \n",
-                                        "</powershell>"
-                                    ]
-                                ]
-                            }
-                        },
-                        {
-                            "Fn::Base64": {
-                                "Fn::Join": [
-                                    "",
-                                    [
-                                        "#"
-                                    ]
-                                ]
-                            }
-                        }
-                    ]
-                }
-            }
-        },
-        "EC2Instance4": {
-            "Type": "AWS::EC2::Instance",
-            "Condition": "Launch4",
-            "DependsOn": [
-                "EC2Instance1",
-                "EC2Instance2",
-                "EC2Instance3",
+            "Tags":[
+               {
+                  "Key":"Name",
+                  "Value":{
+                     "Fn::Join":[
+                        "",
+                        [
+                           {
+                              "Ref":"VirtualMachineNamePrefix"
+                           },
+                           {
+                              "Ref":"VmIndex1"
+                           }
+                        ]
+                     ]
+                  }
+               }
             ],
-            "Properties": {
-                "ImageId": {
-                    "Ref": "AmiID"
-                },
-                "InstanceType": {
-                    "Ref": "InstanceType"
-                },
-                "KeyName": {
-                    "Ref": "KeyName"
-                },
-				"MetadataOptions": {
-					"InstanceMetadataTags" : "enabled"
-				},
-                "NetworkInterfaces": [
-                    {
-                        "AssociatePublicIpAddress": "true",
-                        "SubnetId": {
-                            "Ref": "SubnetID"
-                        },
-                        "GroupSet": [
-                            {
-                                "Ref": "InstanceSecurityGroup"
-                            }
-                        ],
-                        "DeviceIndex": "0"
-                    }
-                ],
-                "BlockDeviceMappings": [
-                    {
-                        "DeviceName": "/dev/sda1",
-                        "Ebs": {
-                            "VolumeType": "standard",
-                            "DeleteOnTermination": "true"
-                        }
-                    },
-                    {
-                        "DeviceName": "/dev/sdk",
-                        "NoDevice": {}
-                    }
-                ],
-                "Tags": [
-                    {
-                        "Key": "Name",
-                        "Value": {
-                            "Fn::Join": [
-                                "",
-                                [
-                                    {
-                                        "Ref": "VirtualMachineNamePrefix"
-                                    },
-                                    {
-                                        "Ref": "VmIndex4"
-                                    }
-                                ]
-                            ]
-                        }
-                    }
-                ],
-                "UserData": {
-                    "Fn::If": [
-                        "Windows",
-                        {
-                            "Fn::Base64": {
-                                "Fn::Join": [
-                                    "",
-                                    [
-                                        "<powershell>\n",
-                                        "Invoke-WebRequest -Uri 'https://ncachedeployments.s3.amazonaws.com/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
-                                        {
-                                            "Ref": "Key"
-                                        },
-                                        "\" -FirstName \"",
-                                        {
-                                            "Ref": "FirstName"
-                                        },
-                                        "\" -LastName \"",
-                                        {
-                                            "Ref": "LastName"
-                                        },
-                                        "\" -Email \"",
-                                        {
-                                            "Ref": "Email"
-                                        },
-                                        "\" -Company \"",
-                                        {
-                                            "Ref": "Company"
-                                        },
-                                        "\" -StagingActivateJsonURL \"",
-                                        {
-                                            "Ref": "StagingActivateJsonURL"
-                                        },
-                                        "\" -Extension $",
-                                        {
-                                            "Ref": "Extension"
-                                        },
-                                        " -InstallType \"",
-                                        {
-                                            "Ref": "InstallType"
-                                        },
-                                        "\" \n",
-                                        "</powershell>"
-                                    ]
-                                ]
-                            }
-                        },
-                        {
-                            "Fn::Base64": {
-                                "Fn::Join": [
-                                    "",
-                                    [
-                                        "#"
-                                    ]
-                                ]
-                            }
-                        }
-                    ]
-                }
+            "UserData":{
+               "Fn::If":[
+                  "Windows",
+                  {
+                     "Fn::Base64":{
+                        "Fn::Join":[
+                           "",
+                           [
+                              "<powershell>\n",
+                              "Invoke-WebRequest -Uri 'https://ncachedeployments.s3.amazonaws.com/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
+                              {
+                                 "Ref":"Key"
+                              },
+                              "\" -FirstName \"",
+                              {
+                                 "Ref":"FirstName"
+                              },
+                              "\" -LastName \"",
+                              {
+                                 "Ref":"LastName"
+                              },
+                              "\" -Email \"",
+                              {
+                                 "Ref":"Email"
+                              },
+                              "\" -Company \"",
+                              {
+                                 "Ref":"Company"
+                              },
+                              "\" -StagingActivateJsonURL \"",
+                              {
+                                 "Ref":"StagingActivateJsonURL"
+                              },
+                              "\" -Extension $",
+                              {
+                                 "Ref":"Extension"
+                              },
+                              " -InstallType \"",
+                              {
+                                 "Ref":"InstallType"
+                              },
+                              "\" \n",
+                              "</powershell>"
+                           ]
+                        ]
+                     }
+                  },
+                  {
+                     "Fn::Base64":{
+                        "Fn::Join":[
+                           "",
+                           [
+                              "#"
+                           ]
+                        ]
+                     }
+                  }
+               ]
             }
-        },
-        "EC2Instance5": {
-            "Type": "AWS::EC2::Instance",
-            "Condition": "Launch3",
-            "DependsOn": [
-                "EC2Instance1",
-                "EC2Instance2",
-                "EC2Instance3",
-                "EC2Instance4",
+         }
+      },
+      "EC2Instance2":{
+         "Type":"AWS::EC2::Instance",
+         "Condition":"Launch2",
+         "DependsOn":[
+            "EC2Instance1"
+         ],
+         "Properties":{
+            "ImageId":{
+               "Ref":"AmiID"
+            },
+            "InstanceType":{
+               "Ref":"InstanceType"
+            },
+            "KeyName":{
+               "Ref":"KeyName"
+            },
+            "MetadataOptions":{
+               "InstanceMetadataTags":"enabled"
+            },
+            "NetworkInterfaces":[
+               {
+                  "AssociatePublicIpAddress":"true",
+                  "SubnetId":{
+                     "Ref":"SubnetID"
+                  },
+                  "GroupSet":[
+                     {
+                        "Ref":"InstanceSecurityGroup"
+                     }
+                  ],
+                  "DeviceIndex":"0"
+               }
             ],
-            "Properties": {
-                "ImageId": {
-                    "Ref": "AmiID"
-                },
-                "InstanceType": {
-                    "Ref": "InstanceType"
-                },
-                "KeyName": {
-                    "Ref": "KeyName"
-                },
-				"MetadataOptions": {
-					"InstanceMetadataTags" : "enabled"
-				},
-                "NetworkInterfaces": [
-                    {
-                        "AssociatePublicIpAddress": "true",
-                        "SubnetId": {
-                            "Ref": "SubnetID"
-                        },
-                        "GroupSet": [
-                            {
-                                "Ref": "InstanceSecurityGroup"
-                            }
-                        ],
-                        "DeviceIndex": "0"
-                    }
-                ],
-                "BlockDeviceMappings": [
-                    {
-                        "DeviceName": "/dev/sda1",
-                        "Ebs": {
-                            "VolumeType": "standard",
-                            "DeleteOnTermination": "true"
-                        }
-                    },
-                    {
-                        "DeviceName": "/dev/sdk",
-                        "NoDevice": {}
-                    }
-                ],
-                "Tags": [
-                    {
-                        "Key": "Name",
-                        "Value": {
-                            "Fn::Join": [
-                                "",
-                                [
-                                    {
-                                        "Ref": "VirtualMachineNamePrefix"
-                                    },
-                                    {
-                                        "Ref": "VmIndex5"
-                                    }
-                                ]
-                            ]
-                        }
-                    }
-                ],
-                "UserData": {
-                    "Fn::If": [
-                        "Windows",
-                        {
-                            "Fn::Base64": {
-                                "Fn::Join": [
-                                    "",
-                                    [
-                                        "<powershell>\n",
-                                        "Invoke-WebRequest -Uri 'https://ncachedeployments.s3.amazonaws.com/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
-                                        {
-                                            "Ref": "Key"
-                                        },
-                                        "\" -FirstName \"",
-                                        {
-                                            "Ref": "FirstName"
-                                        },
-                                        "\" -LastName \"",
-                                        {
-                                            "Ref": "LastName"
-                                        },
-                                        "\" -Email \"",
-                                        {
-                                            "Ref": "Email"
-                                        },
-                                        "\" -Company \"",
-                                        {
-                                            "Ref": "Company"
-                                        },
-                                        "\" -StagingActivateJsonURL \"",
-                                        {
-                                            "Ref": "StagingActivateJsonURL"
-                                        },
-                                        "\" -Extension $",
-                                        {
-                                            "Ref": "Extension"
-                                        },
-                                        " -InstallType \"",
-                                        {
-                                            "Ref": "InstallType"
-                                        },
-                                        "\" \n",
-                                        "</powershell>"
-                                    ]
-                                ]
-                            }
-                        },
-                        {
-                            "Fn::Base64": {
-                                "Fn::Join": [
-                                    "",
-                                    [
-                                        "#"
-                                    ]
-                                ]
-                            }
-                        }
-                    ]
-                }
+            "BlockDeviceMappings":[
+               {
+                  "DeviceName":"/dev/sda1",
+                  "Ebs":{
+                     "VolumeType":"standard",
+                     "DeleteOnTermination":"true"
+                  }
+               },
+               {
+                  "DeviceName":"/dev/sdk",
+                  "NoDevice":{
+                     
+                  }
+               }
+            ],
+            "Tags":[
+               {
+                  "Key":"Name",
+                  "Value":{
+                     "Fn::Join":[
+                        "",
+                        [
+                           {
+                              "Ref":"VirtualMachineNamePrefix"
+                           },
+                           {
+                              "Ref":"VmIndex2"
+                           }
+                        ]
+                     ]
+                  }
+               }
+            ],
+            "UserData":{
+               "Fn::If":[
+                  "Windows",
+                  {
+                     "Fn::Base64":{
+                        "Fn::Join":[
+                           "",
+                           [
+                              "<powershell>\n",
+                              "Invoke-WebRequest -Uri 'https://ncachedeployments.s3.amazonaws.com/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
+                              {
+                                 "Ref":"Key"
+                              },
+                              "\" -FirstName \"",
+                              {
+                                 "Ref":"FirstName"
+                              },
+                              "\" -LastName \"",
+                              {
+                                 "Ref":"LastName"
+                              },
+                              "\" -Email \"",
+                              {
+                                 "Ref":"Email"
+                              },
+                              "\" -Company \"",
+                              {
+                                 "Ref":"Company"
+                              },
+                              "\" -StagingActivateJsonURL \"",
+                              {
+                                 "Ref":"StagingActivateJsonURL"
+                              },
+                              "\" -Extension $",
+                              {
+                                 "Ref":"Extension"
+                              },
+                              " -InstallType \"",
+                              {
+                                 "Ref":"InstallType"
+                              },
+                              "\" \n",
+                              "</powershell>"
+                           ]
+                        ]
+                     }
+                  },
+                  {
+                     "Fn::Base64":{
+                        "Fn::Join":[
+                           "",
+                           [
+                              "#"
+                           ]
+                        ]
+                     }
+                  }
+               ]
             }
-        },
-        "InstanceSecurityGroup": {
-            "Type": "AWS::EC2::SecurityGroup",
-            "Properties": {
-                "VpcId": {
-                    "Ref": "VpcId"
-                },
-                "GroupDescription": "Enable all required ports",
-                "SecurityGroupIngress": [
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": 22,
-                        "ToPort": 22,
-                        "CidrIp": "0.0.0.0/0"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": 80,
-                        "ToPort": 80,
-                        "CidrIp": "0.0.0.0/0"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": 8250,
-                        "ToPort": 8260,
-                        "CidrIp": "0.0.0.0/0"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": 9800,
-                        "ToPort": 9800,
-                        "CidrIp": "0.0.0.0/0"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": 7800,
-                        "ToPort": 7900,
-                        "CidrIp": "0.0.0.0/0"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": 8300,
-                        "ToPort": 8400,
-                        "CidrIp": "0.0.0.0/0"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": 9900,
-                        "ToPort": 9900,
-                        "CidrIp": "0.0.0.0/0"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": 10000,
-                        "ToPort": 11000,
-                        "CidrIp": "0.0.0.0/0"
-                    },
-                    {
-                        "FromPort": 3389,
-                        "ToPort": 3389,
-                        "IpProtocol": "tcp",
-                        "CidrIp": "0.0.0.0/0"
-                    }
-                ],
-                "SecurityGroupEgress": [
-                    {
-                        "IpProtocol": "-1",
-                        "CidrIp": "0.0.0.0/0"
-                    }
-                ]
+         }
+      },
+      "EC2Instance3":{
+         "Type":"AWS::EC2::Instance",
+         "Condition":"Launch3",
+         "DependsOn":[
+            "EC2Instance1",
+            "EC2Instance2"
+         ],
+         "Properties":{
+            "ImageId":{
+               "Ref":"AmiID"
+            },
+            "InstanceType":{
+               "Ref":"InstanceType"
+            },
+            "KeyName":{
+               "Ref":"KeyName"
+            },
+            "MetadataOptions":{
+               "InstanceMetadataTags":"enabled"
+            },
+            "NetworkInterfaces":[
+               {
+                  "AssociatePublicIpAddress":"true",
+                  "SubnetId":{
+                     "Ref":"SubnetID"
+                  },
+                  "GroupSet":[
+                     {
+                        "Ref":"InstanceSecurityGroup"
+                     }
+                  ],
+                  "DeviceIndex":"0"
+               }
+            ],
+            "BlockDeviceMappings":[
+               {
+                  "DeviceName":"/dev/sda1",
+                  "Ebs":{
+                     "VolumeType":"standard",
+                     "DeleteOnTermination":"true"
+                  }
+               },
+               {
+                  "DeviceName":"/dev/sdk",
+                  "NoDevice":{
+                     
+                  }
+               }
+            ],
+            "Tags":[
+               {
+                  "Key":"Name",
+                  "Value":{
+                     "Fn::Join":[
+                        "",
+                        [
+                           {
+                              "Ref":"VirtualMachineNamePrefix"
+                           },
+                           {
+                              "Ref":"VmIndex3"
+                           }
+                        ]
+                     ]
+                  }
+               }
+            ],
+            "UserData":{
+               "Fn::If":[
+                  "Windows",
+                  {
+                     "Fn::Base64":{
+                        "Fn::Join":[
+                           "",
+                           [
+                              "<powershell>\n",
+                              "Invoke-WebRequest -Uri 'https://ncachedeployments.s3.amazonaws.com/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
+                              {
+                                 "Ref":"Key"
+                              },
+                              "\" -FirstName \"",
+                              {
+                                 "Ref":"FirstName"
+                              },
+                              "\" -LastName \"",
+                              {
+                                 "Ref":"LastName"
+                              },
+                              "\" -Email \"",
+                              {
+                                 "Ref":"Email"
+                              },
+                              "\" -Company \"",
+                              {
+                                 "Ref":"Company"
+                              },
+                              "\" -StagingActivateJsonURL \"",
+                              {
+                                 "Ref":"StagingActivateJsonURL"
+                              },
+                              "\" -Extension $",
+                              {
+                                 "Ref":"Extension"
+                              },
+                              " -InstallType \"",
+                              {
+                                 "Ref":"InstallType"
+                              },
+                              "\" \n",
+                              "</powershell>"
+                           ]
+                        ]
+                     }
+                  },
+                  {
+                     "Fn::Base64":{
+                        "Fn::Join":[
+                           "",
+                           [
+                              "#"
+                           ]
+                        ]
+                     }
+                  }
+               ]
             }
-        }
-    }
+         }
+      },
+      "EC2Instance4":{
+         "Type":"AWS::EC2::Instance",
+         "Condition":"Launch4",
+         "DependsOn":[
+            "EC2Instance1",
+            "EC2Instance2",
+            "EC2Instance3"
+         ],
+         "Properties":{
+            "ImageId":{
+               "Ref":"AmiID"
+            },
+            "InstanceType":{
+               "Ref":"InstanceType"
+            },
+            "KeyName":{
+               "Ref":"KeyName"
+            },
+            "MetadataOptions":{
+               "InstanceMetadataTags":"enabled"
+            },
+            "NetworkInterfaces":[
+               {
+                  "AssociatePublicIpAddress":"true",
+                  "SubnetId":{
+                     "Ref":"SubnetID"
+                  },
+                  "GroupSet":[
+                     {
+                        "Ref":"InstanceSecurityGroup"
+                     }
+                  ],
+                  "DeviceIndex":"0"
+               }
+            ],
+            "BlockDeviceMappings":[
+               {
+                  "DeviceName":"/dev/sda1",
+                  "Ebs":{
+                     "VolumeType":"standard",
+                     "DeleteOnTermination":"true"
+                  }
+               },
+               {
+                  "DeviceName":"/dev/sdk",
+                  "NoDevice":{
+                     
+                  }
+               }
+            ],
+            "Tags":[
+               {
+                  "Key":"Name",
+                  "Value":{
+                     "Fn::Join":[
+                        "",
+                        [
+                           {
+                              "Ref":"VirtualMachineNamePrefix"
+                           },
+                           {
+                              "Ref":"VmIndex4"
+                           }
+                        ]
+                     ]
+                  }
+               }
+            ],
+            "UserData":{
+               "Fn::If":[
+                  "Windows",
+                  {
+                     "Fn::Base64":{
+                        "Fn::Join":[
+                           "",
+                           [
+                              "<powershell>\n",
+                              "Invoke-WebRequest -Uri 'https://ncachedeployments.s3.amazonaws.com/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
+                              {
+                                 "Ref":"Key"
+                              },
+                              "\" -FirstName \"",
+                              {
+                                 "Ref":"FirstName"
+                              },
+                              "\" -LastName \"",
+                              {
+                                 "Ref":"LastName"
+                              },
+                              "\" -Email \"",
+                              {
+                                 "Ref":"Email"
+                              },
+                              "\" -Company \"",
+                              {
+                                 "Ref":"Company"
+                              },
+                              "\" -StagingActivateJsonURL \"",
+                              {
+                                 "Ref":"StagingActivateJsonURL"
+                              },
+                              "\" -Extension $",
+                              {
+                                 "Ref":"Extension"
+                              },
+                              " -InstallType \"",
+                              {
+                                 "Ref":"InstallType"
+                              },
+                              "\" \n",
+                              "</powershell>"
+                           ]
+                        ]
+                     }
+                  },
+                  {
+                     "Fn::Base64":{
+                        "Fn::Join":[
+                           "",
+                           [
+                              "#"
+                           ]
+                        ]
+                     }
+                  }
+               ]
+            }
+         }
+      },
+      "EC2Instance5":{
+         "Type":"AWS::EC2::Instance",
+         "Condition":"Launch3",
+         "DependsOn":[
+            "EC2Instance1",
+            "EC2Instance2",
+            "EC2Instance3",
+            "EC2Instance4"
+         ],
+         "Properties":{
+            "ImageId":{
+               "Ref":"AmiID"
+            },
+            "InstanceType":{
+               "Ref":"InstanceType"
+            },
+            "KeyName":{
+               "Ref":"KeyName"
+            },
+            "MetadataOptions":{
+               "InstanceMetadataTags":"enabled"
+            },
+            "NetworkInterfaces":[
+               {
+                  "AssociatePublicIpAddress":"true",
+                  "SubnetId":{
+                     "Ref":"SubnetID"
+                  },
+                  "GroupSet":[
+                     {
+                        "Ref":"InstanceSecurityGroup"
+                     }
+                  ],
+                  "DeviceIndex":"0"
+               }
+            ],
+            "BlockDeviceMappings":[
+               {
+                  "DeviceName":"/dev/sda1",
+                  "Ebs":{
+                     "VolumeType":"standard",
+                     "DeleteOnTermination":"true"
+                  }
+               },
+               {
+                  "DeviceName":"/dev/sdk",
+                  "NoDevice":{
+                     
+                  }
+               }
+            ],
+            "Tags":[
+               {
+                  "Key":"Name",
+                  "Value":{
+                     "Fn::Join":[
+                        "",
+                        [
+                           {
+                              "Ref":"VirtualMachineNamePrefix"
+                           },
+                           {
+                              "Ref":"VmIndex5"
+                           }
+                        ]
+                     ]
+                  }
+               }
+            ],
+            "UserData":{
+               "Fn::If":[
+                  "Windows",
+                  {
+                     "Fn::Base64":{
+                        "Fn::Join":[
+                           "",
+                           [
+                              "<powershell>\n",
+                              "Invoke-WebRequest -Uri 'https://ncachedeployments.s3.amazonaws.com/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
+                              {
+                                 "Ref":"Key"
+                              },
+                              "\" -FirstName \"",
+                              {
+                                 "Ref":"FirstName"
+                              },
+                              "\" -LastName \"",
+                              {
+                                 "Ref":"LastName"
+                              },
+                              "\" -Email \"",
+                              {
+                                 "Ref":"Email"
+                              },
+                              "\" -Company \"",
+                              {
+                                 "Ref":"Company"
+                              },
+                              "\" -StagingActivateJsonURL \"",
+                              {
+                                 "Ref":"StagingActivateJsonURL"
+                              },
+                              "\" -Extension $",
+                              {
+                                 "Ref":"Extension"
+                              },
+                              " -InstallType \"",
+                              {
+                                 "Ref":"InstallType"
+                              },
+                              "\" \n",
+                              "</powershell>"
+                           ]
+                        ]
+                     }
+                  },
+                  {
+                     "Fn::Base64":{
+                        "Fn::Join":[
+                           "",
+                           [
+                              "#"
+                           ]
+                        ]
+                     }
+                  }
+               ]
+            }
+         }
+      },
+      "InstanceSecurityGroup":{
+         "Type":"AWS::EC2::SecurityGroup",
+         "Properties":{
+            "VpcId":{
+               "Ref":"VpcId"
+            },
+            "GroupDescription":"Enable all required ports",
+            "SecurityGroupIngress":[
+               {
+                  "IpProtocol":"tcp",
+                  "FromPort":22,
+                  "ToPort":22,
+                  "CidrIp":"0.0.0.0/0"
+               },
+               {
+                  "IpProtocol":"tcp",
+                  "FromPort":80,
+                  "ToPort":80,
+                  "CidrIp":"0.0.0.0/0"
+               },
+               {
+                  "IpProtocol":"tcp",
+                  "FromPort":8250,
+                  "ToPort":8260,
+                  "CidrIp":"0.0.0.0/0"
+               },
+               {
+                  "IpProtocol":"tcp",
+                  "FromPort":9800,
+                  "ToPort":9800,
+                  "CidrIp":"0.0.0.0/0"
+               },
+               {
+                  "IpProtocol":"tcp",
+                  "FromPort":7800,
+                  "ToPort":7900,
+                  "CidrIp":"0.0.0.0/0"
+               },
+               {
+                  "IpProtocol":"tcp",
+                  "FromPort":8300,
+                  "ToPort":8400,
+                  "CidrIp":"0.0.0.0/0"
+               },
+               {
+                  "IpProtocol":"tcp",
+                  "FromPort":9900,
+                  "ToPort":9900,
+                  "CidrIp":"0.0.0.0/0"
+               },
+               {
+                  "IpProtocol":"tcp",
+                  "FromPort":10000,
+                  "ToPort":11000,
+                  "CidrIp":"0.0.0.0/0"
+               },
+               {
+                  "FromPort":3389,
+                  "ToPort":3389,
+                  "IpProtocol":"tcp",
+                  "CidrIp":"0.0.0.0/0"
+               }
+            ],
+            "SecurityGroupEgress":[
+               {
+                  "IpProtocol":"-1",
+                  "CidrIp":"0.0.0.0/0"
+               }
+            ]
+         }
+      }
+   }
 }
