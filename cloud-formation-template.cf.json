@@ -154,6 +154,17 @@
       }
    },
    "Resources":{
+      "LaunchTemplate1":{
+         "Type":"AWS::EC2::LaunchTemplate",
+         "Properties":{
+            "LaunchTemplateData":{
+               "MetadataOptions":{
+                  "InstanceMetadataTags":"enabled"
+               }
+            },
+            "LaunchTemplateName":"NCacheServerLaunchTemplate"
+         }
+      },
       "EC2Instance1":{
          "Type":"AWS::EC2::Instance",
          "Properties":{
@@ -166,10 +177,10 @@
             "KeyName":{
                "Ref":"KeyName"
             },
-	    "LaunchTemplate": {
-	        "LaunchTemplateId" : "lt-0df8ffeba45e8c1ed",
-		"Version": "3"
-	    },        
+            "LaunchTemplate":{
+               "LaunchTemplateName":"NCacheServerLaunchTemplate"
+               "Version":"1"
+            },
             "NetworkInterfaces":[
                {
                   "AssociatePublicIpAddress":"true",
@@ -294,10 +305,10 @@
             "KeyName":{
                "Ref":"KeyName"
             },
-	    "LaunchTemplate": {
-	        "LaunchTemplateId" : "lt-0df8ffeba45e8c1ed",
-		"Version": "3"
-	    },    
+            "LaunchTemplate":{
+               "LaunchTemplateName":"NCacheServerLaunchTemplate"
+               "Version":"3"
+            },
             "NetworkInterfaces":[
                {
                   "AssociatePublicIpAddress":"true",
@@ -423,10 +434,10 @@
             "KeyName":{
                "Ref":"KeyName"
             },
-	    "LaunchTemplate": {
-	        "LaunchTemplateId" : "lt-0df8ffeba45e8c1ed",
-		"Version": "3"
-	    },   
+            "LaunchTemplate":{
+               "LaunchTemplateName":"NCacheServerLaunchTemplate"
+               "Version":"3"
+            },
             "NetworkInterfaces":[
                {
                   "AssociatePublicIpAddress":"true",
@@ -553,10 +564,10 @@
             "KeyName":{
                "Ref":"KeyName"
             },
-	    "LaunchTemplate": {
-	        "LaunchTemplateId" : "lt-0df8ffeba45e8c1ed",
-		"Version": "3"
-	    },    
+            "LaunchTemplate":{
+               "LaunchTemplateName":"NCacheServerLaunchTemplate"
+               "Version":"3"
+            },
             "NetworkInterfaces":[
                {
                   "AssociatePublicIpAddress":"true",
@@ -684,10 +695,10 @@
             "KeyName":{
                "Ref":"KeyName"
             },
-	    "LaunchTemplate": {
-	        "LaunchTemplateId" : "lt-0df8ffeba45e8c1ed",
-		"Version": "3"
-	    },   
+            "LaunchTemplate":{
+               "LaunchTemplateName":"NCacheServerLaunchTemplate"
+               "Version":"3"
+            },
             "NetworkInterfaces":[
                {
                   "AssociatePublicIpAddress":"true",
