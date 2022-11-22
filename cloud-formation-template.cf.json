@@ -178,7 +178,7 @@
                "Ref":"KeyName"
             },
             "LaunchTemplate":{
-               "LaunchTemplateName":"NCacheServerLaunchTemplate"
+               "LaunchTemplateName":"NCacheServerLaunchTemplate",
                "Version":"1"
             },
             "NetworkInterfaces":[
@@ -306,7 +306,7 @@
                "Ref":"KeyName"
             },
             "LaunchTemplate":{
-               "LaunchTemplateName":"NCacheServerLaunchTemplate"
+               "LaunchTemplateName":"NCacheServerLaunchTemplate",
                "Version":"3"
             },
             "NetworkInterfaces":[
@@ -435,7 +435,7 @@
                "Ref":"KeyName"
             },
             "LaunchTemplate":{
-               "LaunchTemplateName":"NCacheServerLaunchTemplate"
+               "LaunchTemplateName":"NCacheServerLaunchTemplate",
                "Version":"3"
             },
             "NetworkInterfaces":[
@@ -565,7 +565,7 @@
                "Ref":"KeyName"
             },
             "LaunchTemplate":{
-               "LaunchTemplateName":"NCacheServerLaunchTemplate"
+               "LaunchTemplateName":"NCacheServerLaunchTemplate",
                "Version":"3"
             },
             "NetworkInterfaces":[
@@ -696,7 +696,7 @@
                "Ref":"KeyName"
             },
             "LaunchTemplate":{
-               "LaunchTemplateName":"NCacheServerLaunchTemplate"
+               "LaunchTemplateName":"NCacheServerLaunchTemplate",
                "Version":"3"
             },
             "NetworkInterfaces":[
