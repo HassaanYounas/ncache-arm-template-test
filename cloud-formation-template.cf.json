@@ -166,9 +166,16 @@
             "KeyName":{
                "Ref":"KeyName"
             },
-            "MetadataOptions":{
-               "InstanceMetadataTags":"enabled"
-            },
+			"LaunchTemplate": {
+				"Type" : "AWS::EC2::LaunchTemplate",
+				"Properties" : {
+					"LaunchTemplateData": {
+						"MetadataOptions":{
+							"InstanceMetadataTags":"enabled"
+						}
+					}
+				}
+			},        
             "NetworkInterfaces":[
                {
                   "AssociatePublicIpAddress":"true",
@@ -293,9 +300,16 @@
             "KeyName":{
                "Ref":"KeyName"
             },
-            "MetadataOptions":{
-               "InstanceMetadataTags":"enabled"
-            },
+            "LaunchTemplate": {
+				"Type" : "AWS::EC2::LaunchTemplate",
+				"Properties" : {
+					"LaunchTemplateData": {
+						"MetadataOptions":{
+							"InstanceMetadataTags":"enabled"
+						}
+					}
+				}
+			},   
             "NetworkInterfaces":[
                {
                   "AssociatePublicIpAddress":"true",
@@ -421,9 +435,16 @@
             "KeyName":{
                "Ref":"KeyName"
             },
-            "MetadataOptions":{
-               "InstanceMetadataTags":"enabled"
-            },
+            "LaunchTemplate": {
+				"Type" : "AWS::EC2::LaunchTemplate",
+				"Properties" : {
+					"LaunchTemplateData": {
+						"MetadataOptions":{
+							"InstanceMetadataTags":"enabled"
+						}
+					}
+				}
+			},   
             "NetworkInterfaces":[
                {
                   "AssociatePublicIpAddress":"true",
@@ -550,9 +571,16 @@
             "KeyName":{
                "Ref":"KeyName"
             },
-            "MetadataOptions":{
-               "InstanceMetadataTags":"enabled"
-            },
+            "LaunchTemplate": {
+				"Type" : "AWS::EC2::LaunchTemplate",
+				"Properties" : {
+					"LaunchTemplateData": {
+						"MetadataOptions":{
+							"InstanceMetadataTags":"enabled"
+						}
+					}
+				}
+			},   
             "NetworkInterfaces":[
                {
                   "AssociatePublicIpAddress":"true",
@@ -680,9 +708,16 @@
             "KeyName":{
                "Ref":"KeyName"
             },
-            "MetadataOptions":{
-               "InstanceMetadataTags":"enabled"
-            },
+            "LaunchTemplate": {
+				"Type" : "AWS::EC2::LaunchTemplate",
+				"Properties" : {
+					"LaunchTemplateData": {
+						"MetadataOptions":{
+							"InstanceMetadataTags":"enabled"
+						}
+					}
+				}
+			},   
             "NetworkInterfaces":[
                {
                   "AssociatePublicIpAddress":"true",
