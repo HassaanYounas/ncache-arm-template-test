@@ -166,6 +166,9 @@
                 "KeyName": {
                     "Ref": "KeyName"
                 },
+				"MetadataOptions": {
+					"InstanceMetadataTags" : "enabled"
+				},
                 "NetworkInterfaces": [
                     {
                         "AssociatePublicIpAddress": "true",
@@ -288,6 +291,9 @@
                 "KeyName": {
                     "Ref": "KeyName"
                 },
+				"MetadataOptions": {
+					"InstanceMetadataTags" : "enabled"
+				},
                 "NetworkInterfaces": [
                     {
                         "AssociatePublicIpAddress": "true",
@@ -411,6 +417,9 @@
                 "KeyName": {
                     "Ref": "KeyName"
                 },
+				"MetadataOptions": {
+					"InstanceMetadataTags" : "enabled"
+				},
                 "NetworkInterfaces": [
                     {
                         "AssociatePublicIpAddress": "true",
@@ -535,6 +544,9 @@
                 "KeyName": {
                     "Ref": "KeyName"
                 },
+				"MetadataOptions": {
+					"InstanceMetadataTags" : "enabled"
+				},
                 "NetworkInterfaces": [
                     {
                         "AssociatePublicIpAddress": "true",
@@ -660,6 +672,9 @@
                 "KeyName": {
                     "Ref": "KeyName"
                 },
+				"MetadataOptions": {
+					"InstanceMetadataTags" : "enabled"
+				},
                 "NetworkInterfaces": [
                     {
                         "AssociatePublicIpAddress": "true",
