@@ -167,7 +167,8 @@
                "Ref":"KeyName"
             },
 	    "LaunchTemplate": {
-	        "LaunchTemplateId" : "lt-0df8ffeba45e8c1ed"
+	        "LaunchTemplateId" : "lt-0df8ffeba45e8c1ed",
+		"Version": "3"
 	    },        
             "NetworkInterfaces":[
                {
@@ -294,8 +295,9 @@
                "Ref":"KeyName"
             },
 	    "LaunchTemplate": {
-	        "LaunchTemplateId" : "lt-0df8ffeba45e8c1ed"
-	    },  
+	        "LaunchTemplateId" : "lt-0df8ffeba45e8c1ed",
+		"Version": "3"
+	    },    
             "NetworkInterfaces":[
                {
                   "AssociatePublicIpAddress":"true",
@@ -422,8 +424,9 @@
                "Ref":"KeyName"
             },
 	    "LaunchTemplate": {
-	        "LaunchTemplateId" : "lt-0df8ffeba45e8c1ed"
-	    },  
+	        "LaunchTemplateId" : "lt-0df8ffeba45e8c1ed",
+		"Version": "3"
+	    },   
             "NetworkInterfaces":[
                {
                   "AssociatePublicIpAddress":"true",
@@ -551,8 +554,9 @@
                "Ref":"KeyName"
             },
 	    "LaunchTemplate": {
-	        "LaunchTemplateId" : "lt-0df8ffeba45e8c1ed"
-	    },  
+	        "LaunchTemplateId" : "lt-0df8ffeba45e8c1ed",
+		"Version": "3"
+	    },    
             "NetworkInterfaces":[
                {
                   "AssociatePublicIpAddress":"true",
@@ -681,8 +685,9 @@
                "Ref":"KeyName"
             },
 	    "LaunchTemplate": {
-	        "LaunchTemplateId" : "lt-0df8ffeba45e8c1ed"
-	    }, 
+	        "LaunchTemplateId" : "lt-0df8ffeba45e8c1ed",
+		"Version": "3"
+	    },   
             "NetworkInterfaces":[
                {
                   "AssociatePublicIpAddress":"true",
