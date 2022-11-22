@@ -167,14 +167,7 @@
                "Ref":"KeyName"
             },
 			"LaunchTemplate": {
-				"Type" : "AWS::EC2::LaunchTemplate",
-				"Properties" : {
-					"LaunchTemplateData": {
-						"MetadataOptions":{
-							"InstanceMetadataTags":"enabled"
-						}
-					}
-				}
+				"LaunchTemplateId" : "lt-0df8ffeba45e8c1ed",
 			},        
             "NetworkInterfaces":[
                {
