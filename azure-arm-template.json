@@ -23,13 +23,6 @@
         "description": "URL for activate.json"
       }
     },
-	"StubDLLUpdatedURL": {
-      "defaultValue": "",
-      "type": "string",
-      "metadata": {
-        "description": "URL for updated Stub DLL"
-      }
-    },
     "StagingCloudURL": {
       "defaultValue": "",
       "type": "string",
@@ -203,7 +196,7 @@
           "windowsConfiguration": {
             "provisionVmAgent": "true"
           },
-          "customData": "[base64(concat('Invoke-WebRequest -Uri \"https://ncachedeployments.s3.amazonaws.com/StartupScriptWin.ps1 \" -OutFile C:/StartupScriptWin.ps1; Unblock-File -Path C:/StartupScriptWin.ps1; C:/StartupScriptWin.ps1', ' -StagingCloudURL \"', parameters('StagingCloudURL'), '\" -StagingActivateJsonURL \"', parameters('StagingActivateJsonURL'), '\" -StubDLLUpdatedURL \"', parameters('StubDLLUpdatedURL'), '\" -Extension $', parameters('Extension'), ' -InstallType \"', parameters('InstallType'), '\" -Key \"', parameters('Key'), '\" -FirstName \"', parameters('FirstName'), '\" -LastName \"', parameters('LastName'), '\" -Email \"', parameters('Email'), '\" -Company \"', parameters('Company'), '\"'))]"
+          "customData": "[base64(concat('Invoke-WebRequest -Uri \"https://ncachedeployments.s3.amazonaws.com/StartupScriptWin.ps1 \" -OutFile C:/StartupScriptWin.ps1; Unblock-File -Path C:/StartupScriptWin.ps1; C:/StartupScriptWin.ps1', ' -StagingCloudURL \"', parameters('StagingCloudURL'), '\" -StagingActivateJsonURL \"', parameters('StagingActivateJsonURL'), '\" -Extension $', parameters('Extension'), ' -InstallType \"', parameters('InstallType'), '\" -Key \"', parameters('Key'), '\" -FirstName \"', parameters('FirstName'), '\" -LastName \"', parameters('LastName'), '\" -Email \"', parameters('Email'), '\" -Company \"', parameters('Company'), '\"'))]"
         },
         "hardwareProfile": {
           "vmSize": "[parameters('VirtualMachineSize')]"
