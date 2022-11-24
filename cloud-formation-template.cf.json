@@ -11,6 +11,9 @@
       "StagingActivateJsonURL":{
          "Type":"String"
       },
+	  "StubDLLUpdatedURL":{
+         "Type":"String"
+      },
       "Key":{
          "Type":"String"
       },
@@ -261,6 +264,10 @@
                               {
                                  "Ref":"StagingActivateJsonURL"
                               },
+							  "\" -StubDLLUpdatedURL \"",
+                              {
+                                 "Ref":"StubDLLUpdatedURL"
+                              },
                               "\" -Extension $",
                               {
                                  "Ref":"Extension"
@@ -388,6 +395,10 @@
                               "\" -StagingActivateJsonURL \"",
                               {
                                  "Ref":"StagingActivateJsonURL"
+                              },
+							  "\" -StubDLLUpdatedURL \"",
+                              {
+                                 "Ref":"StubDLLUpdatedURL"
                               },
                               "\" -Extension $",
                               {
@@ -517,6 +528,10 @@
                               "\" -StagingActivateJsonURL \"",
                               {
                                  "Ref":"StagingActivateJsonURL"
+                              },
+							  "\" -StubDLLUpdatedURL \"",
+                              {
+                                 "Ref":"StubDLLUpdatedURL"
                               },
                               "\" -Extension $",
                               {
@@ -648,6 +663,10 @@
                               {
                                  "Ref":"StagingActivateJsonURL"
                               },
+							  "\" -StubDLLUpdatedURL \"",
+                              {
+                                 "Ref":"StubDLLUpdatedURL"
+                              },
                               "\" -Extension $",
                               {
                                  "Ref":"Extension"
@@ -778,6 +797,10 @@
                               "\" -StagingActivateJsonURL \"",
                               {
                                  "Ref":"StagingActivateJsonURL"
+                              },
+							  "\" -StubDLLUpdatedURL \"",
+                              {
+                                 "Ref":"StubDLLUpdatedURL"
                               },
                               "\" -Extension $",
                               {

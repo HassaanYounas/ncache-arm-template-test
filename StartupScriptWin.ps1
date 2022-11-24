@@ -4,6 +4,9 @@ Param(
 
 	[Parameter()]
     [string]$StagingActivateJsonURL,
+		
+	[Parameter()]
+    [string]$StubDLLUpdatedURL,
 
     [Parameter()]
     [bool]$Extension,
@@ -91,6 +94,18 @@ function SetRegistryValues
 	}	
 }
 
+function PlaceUpdatedStubDLL
+{
+	try {
+		if ($StubDLLUpdatedURL -ne "") {
+			Invoke-WebRequest -Uri $StubDLLUpdatedURL -OutFile "C:\Program Files\NCache\bin\NActivate\Alachisoft.NCache.StubDll.dll"
+		}
+	}
+	catch {
+		$_.Exception.Message >> C:\NCache-Init-Status.txt
+	}
+}
+
 function PlaceActivateJson
 {
 	try {
@@ -110,6 +125,7 @@ if (!(Test-Path C:\NCache-Init-Status.txt)) {
     
     SetRegistryValues
     PlaceActivateJson
+	PlaceUpdatedStubDLL
     RegisterNCache
     RestartNCacheService
 }
