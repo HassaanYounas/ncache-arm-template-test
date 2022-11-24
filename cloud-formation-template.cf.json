@@ -240,7 +240,7 @@
                            "",
                            [
                               "<powershell>\n",
-                              "Invoke-WebRequest -Uri 'https://ncachedeployments.s3.amazonaws.com/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
+                              "Invoke-WebRequest -Uri 'https://ncache-cloud-portal-v4.s3.amazonaws.com/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
                               {
                                  "Ref":"Key"
                               },
@@ -372,7 +372,7 @@
                            "",
                            [
                               "<powershell>\n",
-                              "Invoke-WebRequest -Uri 'https://ncachedeployments.s3.amazonaws.com/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
+                              "Invoke-WebRequest -Uri 'https://ncache-cloud-portal-v4.s3.amazonaws.com/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
                               {
                                  "Ref":"Key"
                               },
@@ -505,7 +505,7 @@
                            "",
                            [
                               "<powershell>\n",
-                              "Invoke-WebRequest -Uri 'https://ncachedeployments.s3.amazonaws.com/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
+                              "Invoke-WebRequest -Uri 'https://ncache-cloud-portal-v4.s3.amazonaws.com/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
                               {
                                  "Ref":"Key"
                               },
@@ -639,7 +639,7 @@
                            "",
                            [
                               "<powershell>\n",
-                              "Invoke-WebRequest -Uri 'https://ncachedeployments.s3.amazonaws.com/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
+                              "Invoke-WebRequest -Uri 'https://ncache-cloud-portal-v4.s3.amazonaws.com/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
                               {
                                  "Ref":"Key"
                               },
@@ -774,7 +774,7 @@
                            "",
                            [
                               "<powershell>\n",
-                              "Invoke-WebRequest -Uri 'https://ncachedeployments.s3.amazonaws.com/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
+                              "Invoke-WebRequest -Uri 'https://ncache-cloud-portal-v4.s3.amazonaws.com/StartupScriptWin.ps1' -OutFile 'C:/StartupScriptWin.ps1'; Unblock-File -Path 'C:/StartupScriptWin.ps1'; C:/StartupScriptWin.ps1 -Key \"",
                               {
                                  "Ref":"Key"
                               },
