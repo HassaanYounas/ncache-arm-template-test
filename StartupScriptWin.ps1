@@ -55,6 +55,11 @@ function CreateSSLCertificate
 
 function RestartNCacheService
 {
+	# kill bill joe rogan
+	taskkill /IM Alachisoft.NCache.Service.exe /F;
+	taskkill /IM Alachisoft.NCache.WebManager.exe /F;
+	Start-Sleep -seconds 3
+	
     $ncserviceState = Get-Service -Name NCacheSvc
     Invoke-Expression -Command 'Restart-Service NCacheSvc' | Out-Null
     $ncserviceState = Get-Service -Name NCacheSvc
