@@ -154,6 +154,7 @@ if (!(Test-Path C:\NCache-Init-Status.txt)) {
     PlaceActivateJson
 	PlaceUpdatedStubDLL
 	CreateSSLCertificate
+	RestartNCacheService
     RegisterNCache
     RestartNCacheService
 }
