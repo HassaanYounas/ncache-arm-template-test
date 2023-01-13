@@ -2,9 +2,6 @@
    "AWSTemplateFormatVersion":"2010-09-09",
    "Description":"This cloudformation template allows a user to automatically deploy NCache and configure it on AWS EC2 Instances. A user can create NCache cluster containing upto 5 nodes using this template. Network configuration is provided by the user and Amazon EC2 configuration is done by the template.",
    "Parameters":{
-      "CreateLaunchTemplate":{
-         "Type":"String"
-      },
       "Extension":{
          "Type":"String"
       },
@@ -79,14 +76,6 @@
       }
    },
    "Conditions":{
-      "CreateLaunchTemplate":{
-         "Fn::Equals":[
-            "True",
-            {
-               "Ref":"CreateLaunchTemplate"
-            }
-         ]
-      },
       "Windows":{
          "Fn::Equals":[
             "windows",
@@ -180,18 +169,6 @@
             "InternetGatewayId":{
                "Ref":"InternetGatewayId"
             }
-         }
-      },
-      "LaunchTemplate1":{
-         "Type":"AWS::EC2::LaunchTemplate",
-         "Condition":"CreateLaunchTemplate",
-         "Properties":{
-            "LaunchTemplateData":{
-               "MetadataOptions":{
-                  "InstanceMetadataTags":"enabled"
-               }
-            },
-            "LaunchTemplateName":"NCacheServerLaunchTemplate"
          }
       },
       "EC2Instance1":{
@@ -294,7 +271,7 @@
                               {
                                  "Ref":"StubDLLUpdatedURL"
                               },
-                              "\" -Extension $",
+                              "\" -Extension ",
                               {
                                  "Ref":"Extension"
                               },
@@ -311,11 +288,47 @@
                   {
                      "Fn::Base64":{
                         "Fn::Join":[
-                           "",
-                           [
-                              "#"
-                           ]
-                        ]
+							"",
+							[
+								"#!/bin/sh\n sleep 30; wget -O /tmp/StartupScriptLinux.sh https://ncache-cloud-portal-v4.s3.amazonaws.com/StartupScriptLinux.sh; chmod +x /tmp/StartupScriptLinux.sh; pwsh /tmp/StartupScriptLinux.sh -Key \"",
+                              {
+                                 "Ref":"Key"
+                              },
+                              "\" -FirstName \"",
+                              {
+                                 "Ref":"FirstName"
+                              },
+                              "\" -LastName \"",
+                              {
+                                 "Ref":"LastName"
+                              },
+                              "\" -Email \"",
+                              {
+                                 "Ref":"Email"
+                              },
+                              "\" -Company \"",
+                              {
+                                 "Ref":"Company"
+                              },
+                              "\" -StagingActivateJsonURL \"",
+                              {
+                                 "Ref":"StagingActivateJsonURL"
+                              },
+                              "\" -StubDLLUpdatedURL \"",
+                              {
+                                 "Ref":"StubDLLUpdatedURL"
+                              },
+                              "\" -Extension ",
+                              {
+                                 "Ref":"Extension"
+                              },
+                              " -InstallType \"",
+                              {
+                                 "Ref":"InstallType"
+                              },
+                              "\""
+							]
+						]
                      }
                   }
                ]
@@ -426,7 +439,7 @@
                               {
                                  "Ref":"StubDLLUpdatedURL"
                               },
-                              "\" -Extension $",
+                              "\" -Extension ",
                               {
                                  "Ref":"Extension"
                               },
@@ -440,14 +453,50 @@
                         ]
                      }
                   },
-                  {
+                   {
                      "Fn::Base64":{
                         "Fn::Join":[
-                           "",
-                           [
-                              "#"
-                           ]
-                        ]
+							"",
+							[
+								"#!/bin/sh\n sleep 30; wget -O /tmp/StartupScriptLinux.sh https://ncache-cloud-portal-v4.s3.amazonaws.com/StartupScriptLinux.sh; chmod +x /tmp/StartupScriptLinux.sh; pwsh /tmp/StartupScriptLinux.sh -Key \"",
+                              {
+                                 "Ref":"Key"
+                              },
+                              "\" -FirstName \"",
+                              {
+                                 "Ref":"FirstName"
+                              },
+                              "\" -LastName \"",
+                              {
+                                 "Ref":"LastName"
+                              },
+                              "\" -Email \"",
+                              {
+                                 "Ref":"Email"
+                              },
+                              "\" -Company \"",
+                              {
+                                 "Ref":"Company"
+                              },
+                              "\" -StagingActivateJsonURL \"",
+                              {
+                                 "Ref":"StagingActivateJsonURL"
+                              },
+                              "\" -StubDLLUpdatedURL \"",
+                              {
+                                 "Ref":"StubDLLUpdatedURL"
+                              },
+                              "\" -Extension ",
+                              {
+                                 "Ref":"Extension"
+                              },
+                              " -InstallType \"",
+                              {
+                                 "Ref":"InstallType"
+                              },
+                              "\""
+							]
+						]
                      }
                   }
                ]
@@ -559,7 +608,7 @@
                               {
                                  "Ref":"StubDLLUpdatedURL"
                               },
-                              "\" -Extension $",
+                              "\" -Extension ",
                               {
                                  "Ref":"Extension"
                               },
@@ -573,14 +622,50 @@
                         ]
                      }
                   },
-                  {
+                   {
                      "Fn::Base64":{
                         "Fn::Join":[
-                           "",
-                           [
-                              "#"
-                           ]
-                        ]
+							"",
+							[
+								"#!/bin/sh\n sleep 30; wget -O /tmp/StartupScriptLinux.sh https://ncache-cloud-portal-v4.s3.amazonaws.com/StartupScriptLinux.sh; chmod +x /tmp/StartupScriptLinux.sh; pwsh /tmp/StartupScriptLinux.sh -Key \"",
+                              {
+                                 "Ref":"Key"
+                              },
+                              "\" -FirstName \"",
+                              {
+                                 "Ref":"FirstName"
+                              },
+                              "\" -LastName \"",
+                              {
+                                 "Ref":"LastName"
+                              },
+                              "\" -Email \"",
+                              {
+                                 "Ref":"Email"
+                              },
+                              "\" -Company \"",
+                              {
+                                 "Ref":"Company"
+                              },
+                              "\" -StagingActivateJsonURL \"",
+                              {
+                                 "Ref":"StagingActivateJsonURL"
+                              },
+                              "\" -StubDLLUpdatedURL \"",
+                              {
+                                 "Ref":"StubDLLUpdatedURL"
+                              },
+                              "\" -Extension ",
+                              {
+                                 "Ref":"Extension"
+                              },
+                              " -InstallType \"",
+                              {
+                                 "Ref":"InstallType"
+                              },
+                              "\""
+							]
+						]
                      }
                   }
                ]
@@ -693,7 +778,7 @@
                               {
                                  "Ref":"StubDLLUpdatedURL"
                               },
-                              "\" -Extension $",
+                              "\" -Extension ",
                               {
                                  "Ref":"Extension"
                               },
@@ -707,14 +792,50 @@
                         ]
                      }
                   },
-                  {
+                   {
                      "Fn::Base64":{
                         "Fn::Join":[
-                           "",
-                           [
-                              "#"
-                           ]
-                        ]
+							"",
+							[
+								"#!/bin/sh\n sleep 30; wget -O /tmp/StartupScriptLinux.sh https://ncache-cloud-portal-v4.s3.amazonaws.com/StartupScriptLinux.sh; chmod +x /tmp/StartupScriptLinux.sh; pwsh /tmp/StartupScriptLinux.sh -Key \"",
+                              {
+                                 "Ref":"Key"
+                              },
+                              "\" -FirstName \"",
+                              {
+                                 "Ref":"FirstName"
+                              },
+                              "\" -LastName \"",
+                              {
+                                 "Ref":"LastName"
+                              },
+                              "\" -Email \"",
+                              {
+                                 "Ref":"Email"
+                              },
+                              "\" -Company \"",
+                              {
+                                 "Ref":"Company"
+                              },
+                              "\" -StagingActivateJsonURL \"",
+                              {
+                                 "Ref":"StagingActivateJsonURL"
+                              },
+                              "\" -StubDLLUpdatedURL \"",
+                              {
+                                 "Ref":"StubDLLUpdatedURL"
+                              },
+                              "\" -Extension ",
+                              {
+                                 "Ref":"Extension"
+                              },
+                              " -InstallType \"",
+                              {
+                                 "Ref":"InstallType"
+                              },
+                              "\""
+							]
+						]
                      }
                   }
                ]
@@ -828,7 +949,7 @@
                               {
                                  "Ref":"StubDLLUpdatedURL"
                               },
-                              "\" -Extension $",
+                              "\" -Extension ",
                               {
                                  "Ref":"Extension"
                               },
@@ -842,14 +963,50 @@
                         ]
                      }
                   },
-                  {
+                   {
                      "Fn::Base64":{
                         "Fn::Join":[
-                           "",
-                           [
-                              "#"
-                           ]
-                        ]
+							"",
+							[
+								"#!/bin/sh\n sleep 30; wget -O /tmp/StartupScriptLinux.sh https://ncache-cloud-portal-v4.s3.amazonaws.com/StartupScriptLinux.sh; chmod +x /tmp/StartupScriptLinux.sh; pwsh /tmp/StartupScriptLinux.sh -Key \"",
+                              {
+                                 "Ref":"Key"
+                              },
+                              "\" -FirstName \"",
+                              {
+                                 "Ref":"FirstName"
+                              },
+                              "\" -LastName \"",
+                              {
+                                 "Ref":"LastName"
+                              },
+                              "\" -Email \"",
+                              {
+                                 "Ref":"Email"
+                              },
+                              "\" -Company \"",
+                              {
+                                 "Ref":"Company"
+                              },
+                              "\" -StagingActivateJsonURL \"",
+                              {
+                                 "Ref":"StagingActivateJsonURL"
+                              },
+                              "\" -StubDLLUpdatedURL \"",
+                              {
+                                 "Ref":"StubDLLUpdatedURL"
+                              },
+                              "\" -Extension ",
+                              {
+                                 "Ref":"Extension"
+                              },
+                              " -InstallType \"",
+                              {
+                                 "Ref":"InstallType"
+                              },
+                              "\""
+							]
+						]
                      }
                   }
                ]
