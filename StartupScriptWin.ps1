@@ -47,7 +47,7 @@ function CreateSSLCertificate
 		
 		Import-PfxCertificate -FilePath 'C:\\MyCertificate.pfx' -CertStoreLocation 'Cert:\LocalMachine\Root' -Password $pwd
 		
-		$kestrelSettings = '{ "Kestrel":{ "EndPoints":{ "Http":{ "Url":"http://0.0.0.0:8251" }, "HttpsDefaultCert":{ "Url":"https://0.0.0.0:8252" } }, "Certificates": { "Default": { "Path": "C:\\MyCertificate.pfx", "Password": "password1234" } } } }'
+		$kestrelSettings = '{"Kestrel":{"EndPoints":{"Http":{"Url":"http://0.0.0.0:8251"},"HttpsDefaultCert":{"Url":"https://0.0.0.0:8252"}},"Certificates":{"Default":{"Path":"C:\\MyCertificate.pfx","Password":"password1234"}}}}'
 
 		$kestrelSettings | Out-File "C:\Program Files\NCache\bin\tools\web\config.json"
 	}
