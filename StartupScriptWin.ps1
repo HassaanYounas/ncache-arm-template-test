@@ -55,7 +55,6 @@ function CreateSSLCertificate
 
 function RestartNCacheService
 {
-	# kill bill joe rogan
 	taskkill /IM Alachisoft.NCache.Service.exe /F;
 	taskkill /IM Alachisoft.NCache.WebManager.exe /F;
 	Start-Sleep -seconds 3
