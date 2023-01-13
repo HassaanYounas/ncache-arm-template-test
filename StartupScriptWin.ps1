@@ -38,8 +38,8 @@ function CreateSSLCertificate
 	if ($EnableHttps.Equals("True")) {
 		$cert = New-SelfSignedCertificate -KeyAlgorithm RSA -CertStoreLocation "Cert:\LocalMachine\My"  -Subject "localhost" -FriendlyName "MyCertificate" -TextExtension @("2.5.29.17={critical}{text}DNS=localhost")
 		
-		$pwd = ConvertTo-SecureString -String 'password1234' -Force -AsPlainText; 
-		$path = 'Cert:\LocalMachine\My\' + $cert.thumbprint 
+		$pwd = ConvertTo-SecureString -String 'password1234' -Force -AsPlainText;
+		$path = 'Cert:\LocalMachine\My\' + $cert.thumbprint
 		
 		Export-PfxCertificate -cert $path -FilePath 'C:\\MyCertificate.pfx' -Password $pwd
 		
@@ -47,7 +47,7 @@ function CreateSSLCertificate
 		
 		Import-PfxCertificate -FilePath 'C:\\MyCertificate.pfx' -CertStoreLocation 'Cert:\LocalMachine\Root' -Password $pwd
 		
-		$kestrelSettings = '{"Kestrel":{"EndPoints":{"Http":{"Url":"http://0.0.0.0:8251"},"HttpsInlineCertStore":{"Url":"https://0.0.0.0:8252","Certificate":{"Subject":"localhost","Store":"root","Location":"CurrentUser","AllowInvalid":"true"}},}}}'
+		$kestrelSettings = '{ "Kestrel":{ "EndPoints":{ "Http":{ "Url":"http://0.0.0.0:8251" }, "HttpsDefaultCert":{ "Url":"https://0.0.0.0:8252" } }, "Certificates": { "Default": { "Path": "C:\\MyCertificate.pfx", "Password": "password1234" } } } }'
 
 		$kestrelSettings | Out-File "C:\Program Files\NCache\bin\tools\web\config.json"
 	}
