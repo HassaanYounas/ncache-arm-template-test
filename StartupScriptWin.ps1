@@ -43,7 +43,7 @@ function CreateSSLCertificate
 		
 		Export-PfxCertificate -cert $path -FilePath 'C:\\MyCertificate.pfx' -Password $pwd
 		
-		whoami
+		whoami >> C:\NCache-Init-Status.txt
 		
 		Import-PfxCertificate -FilePath 'C:\\MyCertificate.pfx' -CertStoreLocation 'Cert:\LocalMachine\Root' -Password $pwd
 		
