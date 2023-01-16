@@ -38,6 +38,9 @@ $logFile = "/tmp/NCache-Init-Status.txt"
 
 function RestartNCacheService {
     try {
+		sudo kill $(ps aux | grep 'Alachisoft.NCache.WebManager.dll' | awk '{print $2}')
+		"NCache Web Manager Stopped Successfully." >> $logFile
+		
         systemctl stop ncached;
 		"NCache Service Stopped Successfully." >> $logFile
 
@@ -54,17 +57,17 @@ function CreateSSLCertificate
 {
 	if ($EnableHttps.Equals("True")) {
 	
-		openssl req -x509 -sha256 -days 3650 -nodes -newkey rsa:2048 -keyout MyCertificate.key -out MyCertificate.crt -subj "/CN=localhost" -passin pass:password1234
+		sudo openssl req -x509 -sha256 -days 3650 -nodes -newkey rsa:2048 -keyout ~/MyCertificate.key -out ~/MyCertificate.crt -subj "/CN=localhost" -passin pass:password1234
 
 		sudo chmod +r ~/MyCertificate.crt
 		sudo chmod +r ~/MyCertificate.key
 
 		sudo mkdir /home/ncache
 
-		sudo cp ~/MyCertificate.key /home/ncache
 		sudo cp ~/MyCertificate.crt /home/ncache
+		sudo cp ~/MyCertificate.key /home/ncache
 
-		sudo chown -r ncache /home/ncache
+		sudo chown ncache /home/ncache
 		
 		$kestrelSettings = '{"Kestrel":{"EndPoints":{"Http":{"Url":"http://0.0.0.0:8251"},"HttpsInlineCertStore":{"Url":"https://0.0.0.0:8252","Certificate":{"Path":"/home/ncache/MyCertificate.crt","KeyPath":"/home/ncache/MyCertificate.key","AllowInvalid":"true"}}}}}'
 
